@@ -1,0 +1,9 @@
+FROM openjdk:21
+
+COPY ./build/receiver-spring.jar /receiver-spring.jar
+
+COPY ./build/opentelemetry-javaagent.jar /opentelemetry-javaagent.jar
+
+ENV JAVA_OPTS="-XX:+AllowRedefinitionToAddDeleteMethods  -XX:+EnableDynamicAgentLoading -javaagent:/opentelemetry-javaagent.jar -Dotel.traces.exporter=zipkin -Dotel.exporter=zipkin -Dotel.logs.exporter=none -Dotel.metrics.exporter=none -Dotel.exporter.zipkin.endpoint=http://zipkin:9411/api/v2/spans"
+
+ENTRYPOINT exec java $JAVA_OPTS -jar /receiver-spring.jar

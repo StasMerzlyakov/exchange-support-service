@@ -1,17 +1,15 @@
 package ru.otus.exchange.receiver.conf.sender;
 
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import ru.otus.exchange.common.Discriminator;
 import ru.otus.exchange.common.SagaMessage;
 
-import java.util.UUID;
-
-import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class KafkaSenderConfigurationTest {
+class KafkaSenderConfigurationTest {
 
     @Test
     void test1() throws Exception {
@@ -21,11 +19,12 @@ public class KafkaSenderConfigurationTest {
         UUID uuid = UUID.fromString("550e8400-e29b-41d4-a716-446655440000");
         String key = "123456";
 
-        Discriminator discriminator = Discriminator.ExchangeMessage;
+        Discriminator discriminator = Discriminator.EXCHANGE_MESSAGE;
 
         SagaMessage sagaMessage = new SagaMessage(uuid, key, discriminator);
 
-        String expectedJson = """
+        String expectedJson =
+                """
                 {
                     "exchange":"550e8400-e29b-41d4-a716-446655440000",
                     "key":"123456",

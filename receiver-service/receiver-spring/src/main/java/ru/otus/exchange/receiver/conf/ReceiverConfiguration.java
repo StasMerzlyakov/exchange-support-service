@@ -1,5 +1,6 @@
 package ru.otus.exchange.receiver.conf;
 
+import jakarta.validation.Validator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.exchange.blobstorage.StorageSync;
@@ -8,16 +9,14 @@ import ru.otus.exchange.receiver.ContentStorage;
 import ru.otus.exchange.receiver.InfoStorage;
 import ru.otus.exchange.receiver.ReceiverController;
 import ru.otus.exchange.receiver.SagaSender;
-import ru.otus.exchange.receiver.content.ContentStorageImpl;
 import ru.otus.exchange.receiver.content.BlobSaverCallbackAdapter;
 import ru.otus.exchange.receiver.content.ConstantBlobXmlPathHolderImpl;
+import ru.otus.exchange.receiver.content.ContentStorageImpl;
 import ru.otus.exchange.receiver.core.MessageInfoExtractor;
 import ru.otus.exchange.receiver.core.MessageInfoExtractorImpl;
 import ru.otus.exchange.receiver.core.ReceiverControllerImpl;
 import ru.otus.exchange.receiver.info.InfoStorageImpl;
 import ru.otus.exchange.receiver.info.LowLeverStorage;
-
-import jakarta.validation.Validator;
 
 @Configuration
 public class ReceiverConfiguration {
@@ -43,12 +42,9 @@ public class ReceiverConfiguration {
     }
 
     @Bean
-    public ContentStorage contentStorage(BlobXmlPathHolder blobXmlPathHolder,
-                                         ReceiverProperties receiverProperties,
-                                         XmlProcessor xmlProcessor) {
-        return new ContentStorageImpl(blobXmlPathHolder,
-                receiverProperties.xmlFileName,
-                xmlProcessor);
+    public ContentStorage contentStorage(
+            BlobXmlPathHolder blobXmlPathHolder, ReceiverProperties receiverProperties, XmlProcessor xmlProcessor) {
+        return new ContentStorageImpl(blobXmlPathHolder, receiverProperties.xmlFileName, xmlProcessor);
     }
 
     @Bean
@@ -66,8 +62,7 @@ public class ReceiverConfiguration {
             MessageInfoExtractor extractor,
             InfoStorage infoStorage,
             ContentStorage contentStorage,
-            SagaSender sagaSender
-    ) {
+            SagaSender sagaSender) {
         return new ReceiverControllerImpl(extractor, infoStorage, contentStorage, sagaSender);
     }
 }

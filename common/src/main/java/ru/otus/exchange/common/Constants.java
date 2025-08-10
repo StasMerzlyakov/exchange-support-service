@@ -9,9 +9,6 @@ public class Constants {
         throw new IllegalStateException("Utility class");
     }
 
-    public static final String XML_FILE_NAME = "xml";
-    public static final String JSON_FILE_NAME = "json";
-
     public static final String SERVICE_ID = "ServiceId";
     public static final String REQUEST_ID = "RequestId";
 

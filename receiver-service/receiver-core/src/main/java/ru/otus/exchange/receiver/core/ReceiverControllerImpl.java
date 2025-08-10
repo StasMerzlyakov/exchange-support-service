@@ -1,5 +1,7 @@
 package ru.otus.exchange.receiver.core;
 
+import java.util.UUID;
+import javax.xml.namespace.QName;
 import lombok.extern.slf4j.Slf4j;
 import ru.otus.exchange.common.Discriminator;
 import ru.otus.exchange.common.SagaMessage;
@@ -11,9 +13,6 @@ import ru.otus.exchange.receiver.domain.MessageInfo;
 import ru.otus.exchange.receiver.errors.NotAcceptableException;
 import ru.otus.exchange.receiver.errors.ReceiverException;
 
-import java.util.UUID;
-import javax.xml.namespace.QName;
-
 @Slf4j
 public class ReceiverControllerImpl implements ReceiverController {
 
@@ -22,10 +21,11 @@ public class ReceiverControllerImpl implements ReceiverController {
     private final ContentStorage contentStorage;
     private final SagaSender sagaSender;
 
-    public ReceiverControllerImpl(MessageInfoExtractor extractor,
-                                  InfoStorage infoStorage,
-                                  ContentStorage contentStorage,
-                                  SagaSender sagaSender) {
+    public ReceiverControllerImpl(
+            MessageInfoExtractor extractor,
+            InfoStorage infoStorage,
+            ContentStorage contentStorage,
+            SagaSender sagaSender) {
         this.extractor = extractor;
         this.infoStorage = infoStorage;
         this.contentStorage = contentStorage;
@@ -48,7 +48,8 @@ public class ReceiverControllerImpl implements ReceiverController {
 
         Discriminator discriminator = infoStorage.findDiscriminator(messageBodyQName);
         if (discriminator == null) {
-            String errDesc = String.format("messageBody %s processing error - discriminator not found", messageBodyQName);
+            String errDesc =
+                    String.format("messageBody %s processing error - discriminator not found", messageBodyQName);
             log.warn("requestID {} - {}", requestID, errDesc);
             throw new NotAcceptableException(errDesc);
         }
@@ -58,7 +59,7 @@ public class ReceiverControllerImpl implements ReceiverController {
             log.warn("requestID {} - messageInfo exists, processGUID is changed to {}", requestID, processGUID);
         }
 
-        // HINT считаем что хранилище идемпотентное
+        // HINT считаем что хранилище идемпотентное, то есть данные не будут перезаписываться при наличии
         contentStorage.storeMessage(processGUID, messageInfo, message);
 
         SagaMessage sagaMessage = new SagaMessage(processGUID, messageInfo.getMessageID(), discriminator);

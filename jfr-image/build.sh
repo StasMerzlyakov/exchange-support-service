@@ -15,7 +15,7 @@ pwd=`pwd`
 
 mkdir -p $BUILD_DIR
 
-build gateway
+#build gateway
 pushd ../gateway-service
 ../gradlew clean bootJar
 cp build/libs/$JAR_NAME ${pwd}/$BUILD_DIR/

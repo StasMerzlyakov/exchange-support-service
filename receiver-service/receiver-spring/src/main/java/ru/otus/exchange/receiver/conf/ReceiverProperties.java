@@ -1,9 +1,9 @@
 package ru.otus.exchange.receiver.conf;
 
+import java.time.Duration;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import java.time.Duration;
 
 @Data
 @Configuration

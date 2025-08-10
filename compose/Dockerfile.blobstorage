@@ -2,7 +2,6 @@ FROM openjdk:21
 
 COPY ./build/blob-storage-spring.jar /blob-storage-spring.jar
 
-ENV JAVA_OPTS="-XX:+AllowRedefinitionToAddDeleteMethods  -XX:+EnableDynamicAgentLoading"
-ENV SPRING_OPTS="--blockHound=on"
+ENV JAVA_OPTS=""
 
 ENTRYPOINT exec java $JAVA_OPTS -jar /blob-storage-spring.jar

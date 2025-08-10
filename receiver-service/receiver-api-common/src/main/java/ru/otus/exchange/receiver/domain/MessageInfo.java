@@ -1,14 +1,12 @@
 package ru.otus.exchange.receiver.domain;
 
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import java.util.UUID;
+import javax.xml.namespace.QName;
 import lombok.Builder;
 import lombok.Data;
-
-import javax.xml.namespace.QName;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -27,6 +25,6 @@ public class MessageInfo {
     @Pattern(regexp = "\\d+", message = "Field From does not match regexp pattern")
     private String creator;
 
-    @NotEmpty(message = "Body content is empty")
+    @NotNull(message = "Body content is empty")
     private QName bodyQName;
 }

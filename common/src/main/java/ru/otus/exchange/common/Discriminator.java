@@ -5,8 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum Discriminator {
-
-    ExchangeMessage("exchangeMessage");
+    EXCHANGE_MESSAGE("exchangeMessage");
 
     @JsonValue
     private final String value;

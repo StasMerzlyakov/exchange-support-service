@@ -10,4 +10,3 @@ public class ReceiverException extends RuntimeException {
         super(throwable);
     }
 }
-

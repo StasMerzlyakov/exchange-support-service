@@ -1,0 +1,1 @@
+INSERT INTO department(id, code, is_acceptable) VALUES (1, '123456789', true);

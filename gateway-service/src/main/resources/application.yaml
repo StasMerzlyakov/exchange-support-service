@@ -2,8 +2,10 @@ server:
   port: 8080
 
 serviceId: gateway
-
 spring:
+  http:
+    codecs:
+      max-in-memory-size: 5MB
   data:
     redis:
       host: redis
@@ -36,7 +38,7 @@ spring:
                 - name: RequestIDGenerator
                   args:
                     serviceId: ${serviceId}
-                - RewritePath=/receive,/v1/api
+                - RewritePath=/receive,/api/v1/api/v1.0/
                 - name: CircuitBreaker
                   args:
                     name: backendA

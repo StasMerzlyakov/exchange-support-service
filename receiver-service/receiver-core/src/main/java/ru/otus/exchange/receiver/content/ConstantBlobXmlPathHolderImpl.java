@@ -1,11 +1,12 @@
 package ru.otus.exchange.receiver.content;
 
-import ru.otus.exchange.blobutils.BlobXmlPathHolder;
-
 import java.util.Set;
+import org.springframework.cache.annotation.Cacheable;
+import ru.otus.exchange.blobutils.BlobXmlPathHolder;
 
 public class ConstantBlobXmlPathHolderImpl implements BlobXmlPathHolder {
     @Override
+    @Cacheable("blobPaths")
     public Set<String> getBlobPath(String messageType) {
 
         String envNamespace = "http://exchange.support/envelope";

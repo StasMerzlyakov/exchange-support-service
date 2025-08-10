@@ -28,7 +28,7 @@ public interface ReceiverSwaggerApi {
                 @ApiResponse(responseCode = "403", description = "Department is not acceptable", content = @Content),
                 @ApiResponse(responseCode = "500", description = "Server error", content = @Content)
             })
-    @PostMapping(value = "/", consumes = "application/xml;charset=utf-8")
+    @PostMapping(value = "/", consumes = "application/octet-stream")
     ResponseEntity<Void> receive(
             @Parameter(
                             required = true,
@@ -40,6 +40,6 @@ public interface ReceiverSwaggerApi {
             @RequestBody(
                             required = true,
                             description = "contend defined by soapenv-exchange.xsd",
-                            content = @Content(mediaType = "application/xml;charset=utf-8"))
+                            content = @Content(mediaType = "application/octet-stream"))
                     byte[] message);
 }

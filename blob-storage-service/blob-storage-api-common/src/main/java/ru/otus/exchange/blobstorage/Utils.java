@@ -18,11 +18,10 @@ public class Utils {
     }
 
     @SneakyThrows
-    public static StorageData createStorageData(byte [] byteArray) {
+    public static StorageData createStorageData(byte[] byteArray) {
         String hexDigest = hexDigest(byteArray);
         Metadata metadata = new Metadata(byteArray.length, hexDigest);
         ByteBuffer byteBuffer = ByteBuffer.wrap(byteArray);
         return new StorageData(metadata, byteBuffer);
-
     }
 }

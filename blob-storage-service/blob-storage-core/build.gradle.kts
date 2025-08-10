@@ -18,6 +18,6 @@ dependencies {
     testImplementation(libs.reactor.test)
     testImplementation(libs.mockito.junit.jupiter)
     testRuntimeOnly(libs.slf4j.simple)
-    testImplementation(libs.minio.testcontainer)
+    testImplementation(libs.testcontainer.minio)
     testImplementation(projects.blobStorageService.testUtils)
 }

@@ -1,15 +1,14 @@
 package ru.otus.exchange.receiver.content;
 
+import java.util.Set;
+import java.util.UUID;
+import javax.xml.namespace.QName;
 import lombok.extern.slf4j.Slf4j;
 import ru.otus.exchange.blobutils.BlobXmlPathHolder;
 import ru.otus.exchange.blobutils.XmlProcessor;
 import ru.otus.exchange.receiver.ContentStorage;
 import ru.otus.exchange.receiver.domain.MessageInfo;
 import ru.otus.exchange.receiver.errors.ContentStorageException;
-
-import javax.xml.namespace.QName;
-import java.util.Set;
-import java.util.UUID;
 
 @Slf4j
 public class ContentStorageImpl implements ContentStorage {
@@ -20,10 +19,7 @@ public class ContentStorageImpl implements ContentStorage {
 
     private final BlobXmlPathHolder blobXmlPathHolder;
 
-    public ContentStorageImpl(
-            BlobXmlPathHolder blobXmlPathHolder,
-            String xmlFileName,
-            XmlProcessor xmlProcessor) {
+    public ContentStorageImpl(BlobXmlPathHolder blobXmlPathHolder, String xmlFileName, XmlProcessor xmlProcessor) {
         this.blobXmlPathHolder = blobXmlPathHolder;
         this.xmlFileName = xmlFileName;
         this.xmlProcessor = xmlProcessor;

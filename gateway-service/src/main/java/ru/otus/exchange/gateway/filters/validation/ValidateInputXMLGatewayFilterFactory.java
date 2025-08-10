@@ -77,7 +77,7 @@ public class ValidateInputXMLGatewayFilterFactory
             }
 
             return chain.filter(exchange)
-                    .doOnError(t -> log.error("❌ message {} error", messageInfo.getMessageID()))
+                    .doOnError(t -> log.error("❌ message {} error", messageInfo.getMessageID(), t))
                     .doOnSuccess(v -> log.info("✅ message {} accepted", messageInfo.getMessageID()));
         };
     }

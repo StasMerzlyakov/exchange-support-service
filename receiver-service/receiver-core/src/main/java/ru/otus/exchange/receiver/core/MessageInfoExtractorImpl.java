@@ -1,19 +1,18 @@
 package ru.otus.exchange.receiver.core;
 
-import jakarta.validation.Validator;
-import lombok.extern.slf4j.Slf4j;
-import ru.otus.exchange.fxml.XPathSearcher;
-import ru.otus.exchange.receiver.domain.MessageInfo;
-import ru.otus.exchange.receiver.errors.MessageFormatException;
+import static ru.otus.exchange.common.Constants.*;
+import static ru.otus.exchange.common.Constants.BODY_CONTENT_PATH;
 
-import javax.xml.namespace.QName;
+import jakarta.validation.Validator;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import static ru.otus.exchange.common.Constants.*;
-import static ru.otus.exchange.common.Constants.BODY_CONTENT_PATH;
+import javax.xml.namespace.QName;
+import lombok.extern.slf4j.Slf4j;
+import ru.otus.exchange.fxml.XPathSearcher;
+import ru.otus.exchange.receiver.domain.MessageInfo;
+import ru.otus.exchange.receiver.errors.MessageFormatException;
 
 @Slf4j
 public class MessageInfoExtractorImpl implements MessageInfoExtractor {
@@ -60,10 +59,7 @@ public class MessageInfoExtractorImpl implements MessageInfoExtractor {
         var validations = validator.validate(messageInfo);
         if (!validations.isEmpty()) {
             String errorDesc = String.join(
-                    ", ",
-                    validations.stream()
-                            .map(it -> it.getMessage())
-                            .toList());
+                    ", ", validations.stream().map(it -> it.getMessage()).toList());
             log.error("❌ message validation error: {}", errorDesc);
             throw new MessageFormatException(errorDesc);
         }

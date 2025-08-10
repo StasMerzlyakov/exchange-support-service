@@ -59,12 +59,10 @@ SpringCloudGateway reactive - сервис. Принимает данные, о�
 ### Используемые навыки:
 1. 14 - Разбор JMeter и организация нагрузочного тестирования (gateway-service/gateway-jmeter.jmx, blob-storage-service/blob-storage-spring/blob-stroage-grpc.jmx). 
 2. 23 - Реактивное программирование: Профилирование приложения на Reactor  (ValidateInputXMLGatewayFilterFactory.apply - onSuccess, onError)
-4. 30 - Сквозное логирование в микросервисах. (opentelemetry) 
-5. 31 - Проектирование и архитектура в разрезе микросервисов (API Gateway)
-6. 37 - Шаблоны проектирования отказоустойчивого сервиса (Resilience4j CircuitBreaker) (application.yaml)
+4. 31 - Проектирование и архитектура в разрезе микросервисов (API Gateway)
+5. 37 - Шаблоны проектирования отказоустойчивого сервиса (Resilience4j CircuitBreaker) (application.yaml)
 
 [Описание настроек для gateway](docs/adr/001-gateway-hints.md)
-![zipkin-tracing](docs/img/01-gateway-zipkin-tracing.png)
 
 
 ## models
@@ -130,7 +128,6 @@ java - GRPC + openapi (specification first) сервис, отвечающий �
 3. 19 - Профилирование java приложений. Работа с jvisualvm & asyncProfiler
 
 
-
 ## Receiver
 java - синхронный REST-сервис. (reactor + swagger)
 
@@ -149,8 +146,13 @@ java - синхронный REST-сервис. (reactor + swagger)
 ```
 
 ### Используемые навыки:
-1. 33 - Rest: Swagger, OpenAPI
+1. 3 - Java Instrumentation & Java agent (opentelemetry-agent)
+2. 30 - Сквозное логирование в микросервисах. (opentelemetry)
+3. 33 - Rest: Swagger, OpenAPI
+4. 35 - Kafka
 
+![zipkin-tracing](docs/img/01-gateway-zipkin-tracing.png)
+![zipkin-tracing](docs/img/05-01-receiver-tracing.png)
 
 Метрики: 
 - cpu/ram
