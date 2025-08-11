@@ -26,7 +26,6 @@ kafkaSenderType: kafka
 receiver:
   kafka-wait-timeout: 1s
   next-topic: to_generator_topic
-  xml-file-name: xml
   cache-refresh-timeout: 10s
   blob-storage-host: blobstorage
   blob-storage-port: 9090

@@ -47,3 +47,10 @@ include("receiver-service:receiver-api-common")
 findProject(":receiver-service:receiver-api-common")?.name = "receiver-api-common"
 include("receiver-service:receiver-core")
 findProject(":receiver-service:receiver-core")?.name = "receiver-core"
+include("generator-service")
+include("generator-service:generator-core")
+findProject(":generator-service:generator-core")?.name = "generator-core"
+include("models:json")
+findProject(":models:json")?.name = "json"
+include("generator-service:generator-spring")
+findProject(":generator-service:generator-spring")?.name = "generator-spring"

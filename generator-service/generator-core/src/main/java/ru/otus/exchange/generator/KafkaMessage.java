@@ -1,4 +1,4 @@
-package ru.otus.exchange.common;
+package ru.otus.exchange.generator;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -6,11 +6,12 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.otus.exchange.common.Discriminator;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SagaMessage {
+public class KafkaMessage {
 
     @NotNull(message = "Field exchange is null")
     UUID exchange;

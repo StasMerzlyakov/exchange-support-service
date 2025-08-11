@@ -18,10 +18,10 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import ru.otus.exchange.common.SagaMessage;
-import ru.otus.exchange.receiver.SagaSender;
+import ru.otus.exchange.common.KafkaMessage;
+import ru.otus.exchange.receiver.KafkaSender;
 import ru.otus.exchange.receiver.conf.ReceiverProperties;
-import ru.otus.exchange.receiver.kafka.KafkaSagaSender;
+import ru.otus.exchange.receiver.kafka.KafkaSenderImpl;
 
 @Slf4j
 @Configuration
@@ -39,24 +39,24 @@ public class KafkaSenderConfiguration {
     }
 
     @Bean
-    public ProducerFactory<UUID, SagaMessage> producerFactory(
+    public ProducerFactory<UUID, KafkaMessage> producerFactory(
             KafkaProperties kafkaProperties, ObjectMapper kafkaObjectMapper) {
         Map<String, Object> properties = kafkaProperties.buildProducerProperties();
         properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         var uuidSerializer = new UUIDSerializer();
-        var messageJsonSerializer = new JsonSerializer<SagaMessage>(kafkaObjectMapper);
+        var messageJsonSerializer = new JsonSerializer<KafkaMessage>(kafkaObjectMapper);
         return new DefaultKafkaProducerFactory<>(properties, uuidSerializer, messageJsonSerializer);
     }
 
     @Bean
-    public KafkaTemplate<UUID, SagaMessage> kafkaTemplate(ProducerFactory<UUID, SagaMessage> producerFactory) {
+    public KafkaTemplate<UUID, KafkaMessage> kafkaTemplate(ProducerFactory<UUID, KafkaMessage> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
     }
 
     @Bean
-    public SagaSender sagaSender(
-            ReceiverProperties receiverProperties, KafkaTemplate<UUID, SagaMessage> kafkaTemplate) {
-        return new KafkaSagaSender(receiverProperties, kafkaTemplate);
+    public KafkaSender kafkaSender(
+            ReceiverProperties receiverProperties, KafkaTemplate<UUID, KafkaMessage> kafkaTemplate) {
+        return new KafkaSenderImpl(receiverProperties, kafkaTemplate);
     }
 }

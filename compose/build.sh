@@ -41,3 +41,13 @@ popd
 docker image rm -f receiver-service:1.0
 docker build ./ -f Dockerfile.receiver -t receiver-service:1.0
 
+
+# generator
+pushd ../generator-service/generator-spring/
+../../gradlew clean bootJar
+cp build/libs/generator-spring.jar ${pwd}/build/
+popd
+docker image rm -f generator-service:1.0
+docker build ./ -f Dockerfile.generator -t generator-service:1.0
+
+

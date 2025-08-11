@@ -154,33 +154,37 @@ java - синхронный REST-сервис. (reactor + swagger)
 ![zipkin-tracing](docs/img/01-gateway-zipkin-tracing.png)
 ![zipkin-tracing](docs/img/05-01-receiver-tracing.png)
 
-Метрики: 
-- cpu/ram
-- кол-во отказов в обработке из-за некорректного типа/неизвестного кода ведомства
-- grpc pool
-- database pool
-
-# ------------------------------------ Все что ниже TODO list
-
 
 ## Generator
 java - сервис, отвечающий за генерацию json в зависимости от типа переданного сообщения. Генерирует новый идентификатор сообщения (считаем что формат messageID меняется вместе с форматом сообщения).
 
 (jmh - можно помереть генерацию json freemarker, jackson или gson; с блобами и без)
 
-- извлекает из ZSET сообщение в виде base64url(processGUID, messageID, messageType) 
+- извлекает из kafak сообщение вида:
+```json
+{
+"exchange": "550e8400-e29b-41d4-a716-446655440000",
+"key": "2222222222222222222222222",
+"discriminator" : "exchangeMessage"  
+}
+```
 - по processGUID и messagID извлекает XML по messageID
 - по messageType восстанавливает соответствующий jaxb-объект, маппит его в нужный DO, который преобразует в json; для json генерирует новый идентификатор
-- json сохраняет в хранилище, в БД сохраняет соответствие messageID и jsonId. Если данные в БД уже были(пришёл повтор) - то ничего нового не генерируем (Идемпотентность !!) 
-- отправляет в ZSET сообщение в вида base64url(processGUID, jsonID, receiverDepartmentCode)
+- json сохраняет в хранилище, в БД сохраняет соответствие messageID и jsonId. Если данные в БД уже были(пришёл повтор) то проверяет по хранилищу - надо ли генерировать новое сообщение 
+- отправляет в kafka сообщение вида 
+```json
+{
+  "exchange":"01989806-146c-7ebe-b0a7-bb2042538cb0",
+  "key":"04a287a7-6c37-43e1-9e6d-9736fd4e32e4",
+  "discriminator":"exchangeJson"}
+```
+![generator-kafka]((docs/img/06-01-generator-kafka.png)
+![generator-s3]((docs/img/06-01-generator-s3.png)
 
-Траселог:
-- прием сообщений/отправка сообщений через redis, чтение/запись из BlobStorage, генерация
+#### ----------------------------- Все что ниже TODO -------------------------------------
 
-Актуатор: 
-- включение - отключение генерации через отключение прослушивания ZSET; хотелось бы реализовать получение сигналов из kafka
 
-## OutWay
+## Sender
 java - сервис, отвечающий за отправку данных.
 
 - извлекает из ZSET сообщение в виде base64url(processGUID, jsonID, receiverDepartmentCode)

@@ -22,11 +22,11 @@ dependencies {
     implementation(libs.java.uuid.generator)
 
 
-    /*implementation(platform(libs.opentelemetry.instrumentation.bom))
+    implementation(platform(libs.opentelemetry.instrumentation.bom))
     implementation(libs.opentelemetry.instrumentation.annotations)
     implementation(libs.micrometer.registry.prometheus)
     implementation(libs.micrometer.tracing.bridge.otel)
-    implementation(libs.opentelemetry.exporter.zipkin) */
+    implementation(libs.opentelemetry.exporter.zipkin)
 
 
     implementation(libs.spring.cloud.starter.circuitbreaker.reactor.resilience4j)

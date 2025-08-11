@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import ru.otus.exchange.common.Discriminator;
-import ru.otus.exchange.common.SagaMessage;
+import ru.otus.exchange.common.KafkaMessage;
 
 class KafkaSenderConfigurationTest {
 
@@ -21,7 +21,7 @@ class KafkaSenderConfigurationTest {
 
         Discriminator discriminator = Discriminator.EXCHANGE_MESSAGE;
 
-        SagaMessage sagaMessage = new SagaMessage(uuid, key, discriminator);
+        KafkaMessage kafkaMessage = new KafkaMessage(uuid, key, discriminator);
 
         String expectedJson =
                 """
@@ -32,11 +32,11 @@ class KafkaSenderConfigurationTest {
                 }
                 """;
 
-        String actualJson = objectMapper.writeValueAsString(sagaMessage);
+        String actualJson = objectMapper.writeValueAsString(kafkaMessage);
 
         assertThatJson(actualJson).isEqualTo(expectedJson);
 
-        SagaMessage actualMessage = objectMapper.readValue(expectedJson, SagaMessage.class);
-        assertThat(actualMessage).isEqualTo(sagaMessage);
+        KafkaMessage actualMessage = objectMapper.readValue(expectedJson, KafkaMessage.class);
+        assertThat(actualMessage).isEqualTo(kafkaMessage);
     }
 }

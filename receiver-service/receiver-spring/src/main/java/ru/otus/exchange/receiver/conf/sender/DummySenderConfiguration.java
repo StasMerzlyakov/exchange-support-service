@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.otus.exchange.receiver.SagaSender;
+import ru.otus.exchange.receiver.KafkaSender;
 
 @Slf4j
 @Configuration
@@ -12,7 +12,7 @@ import ru.otus.exchange.receiver.SagaSender;
 public class DummySenderConfiguration {
 
     @Bean
-    public SagaSender dummySender() {
+    public KafkaSender dummySender() {
         return message -> log.info("message {} sent success", message);
     }
 }

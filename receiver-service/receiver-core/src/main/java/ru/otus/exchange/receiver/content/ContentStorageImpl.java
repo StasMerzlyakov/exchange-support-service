@@ -15,13 +15,10 @@ public class ContentStorageImpl implements ContentStorage {
 
     private final XmlProcessor xmlProcessor;
 
-    private final String xmlFileName;
-
     private final BlobXmlPathHolder blobXmlPathHolder;
 
-    public ContentStorageImpl(BlobXmlPathHolder blobXmlPathHolder, String xmlFileName, XmlProcessor xmlProcessor) {
+    public ContentStorageImpl(BlobXmlPathHolder blobXmlPathHolder, XmlProcessor xmlProcessor) {
         this.blobXmlPathHolder = blobXmlPathHolder;
-        this.xmlFileName = xmlFileName;
         this.xmlProcessor = xmlProcessor;
     }
 
@@ -31,7 +28,8 @@ public class ContentStorageImpl implements ContentStorage {
             String exchange = processGUID.toString();
             QName messageBodyQName = messageInfo.getBodyQName();
             Set<String> blobPaths = blobXmlPathHolder.getBlobPath(messageBodyQName.toString());
-            xmlProcessor.storeXml(exchange, content, blobPaths, xmlFileName);
+            String messageID = messageInfo.getMessageID();
+            xmlProcessor.storeXml(exchange, content, blobPaths, messageID);
         } catch (Exception e) {
             log.error("storeMessage error");
             throw new ContentStorageException(e);

@@ -36,7 +36,11 @@ openApiGenerate {
 
 tasks.spotlessJava {
     inputs.files(openApiGenerate.outputDir)
-    dependsOn("openApiGenerate")
+    dependsOn(tasks.named("openApiGenerate"))
+}
+
+tasks.named("compileJava") {
+    dependsOn(tasks.named("openApiGenerate"))
 }
 
 dependencies {

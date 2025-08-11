@@ -4,11 +4,11 @@ import java.util.UUID;
 import javax.xml.namespace.QName;
 import lombok.extern.slf4j.Slf4j;
 import ru.otus.exchange.common.Discriminator;
-import ru.otus.exchange.common.SagaMessage;
+import ru.otus.exchange.common.KafkaMessage;
 import ru.otus.exchange.receiver.ContentStorage;
 import ru.otus.exchange.receiver.InfoStorage;
+import ru.otus.exchange.receiver.KafkaSender;
 import ru.otus.exchange.receiver.ReceiverController;
-import ru.otus.exchange.receiver.SagaSender;
 import ru.otus.exchange.receiver.domain.MessageInfo;
 import ru.otus.exchange.receiver.errors.NotAcceptableException;
 import ru.otus.exchange.receiver.errors.ReceiverException;
@@ -19,17 +19,17 @@ public class ReceiverControllerImpl implements ReceiverController {
     private final MessageInfoExtractor extractor;
     private final InfoStorage infoStorage;
     private final ContentStorage contentStorage;
-    private final SagaSender sagaSender;
+    private final KafkaSender kafkaSender;
 
     public ReceiverControllerImpl(
             MessageInfoExtractor extractor,
             InfoStorage infoStorage,
             ContentStorage contentStorage,
-            SagaSender sagaSender) {
+            KafkaSender kafkaSender) {
         this.extractor = extractor;
         this.infoStorage = infoStorage;
         this.contentStorage = contentStorage;
-        this.sagaSender = sagaSender;
+        this.kafkaSender = kafkaSender;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ReceiverControllerImpl implements ReceiverController {
         // HINT считаем что хранилище идемпотентное, то есть данные не будут перезаписываться при наличии
         contentStorage.storeMessage(processGUID, messageInfo, message);
 
-        SagaMessage sagaMessage = new SagaMessage(processGUID, messageInfo.getMessageID(), discriminator);
-        sagaSender.sent(sagaMessage);
+        KafkaMessage kafkaMessage = new KafkaMessage(processGUID, messageInfo.getMessageID(), discriminator);
+        kafkaSender.send(kafkaMessage);
     }
 }

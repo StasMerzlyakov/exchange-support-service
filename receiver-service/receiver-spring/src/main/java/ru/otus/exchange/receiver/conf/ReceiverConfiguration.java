@@ -7,8 +7,8 @@ import ru.otus.exchange.blobstorage.StorageSync;
 import ru.otus.exchange.blobutils.*;
 import ru.otus.exchange.receiver.ContentStorage;
 import ru.otus.exchange.receiver.InfoStorage;
+import ru.otus.exchange.receiver.KafkaSender;
 import ru.otus.exchange.receiver.ReceiverController;
-import ru.otus.exchange.receiver.SagaSender;
 import ru.otus.exchange.receiver.content.BlobSaverCallbackAdapter;
 import ru.otus.exchange.receiver.content.ConstantBlobXmlPathHolderImpl;
 import ru.otus.exchange.receiver.content.ContentStorageImpl;
@@ -44,7 +44,7 @@ public class ReceiverConfiguration {
     @Bean
     public ContentStorage contentStorage(
             BlobXmlPathHolder blobXmlPathHolder, ReceiverProperties receiverProperties, XmlProcessor xmlProcessor) {
-        return new ContentStorageImpl(blobXmlPathHolder, receiverProperties.xmlFileName, xmlProcessor);
+        return new ContentStorageImpl(blobXmlPathHolder, xmlProcessor);
     }
 
     @Bean
@@ -62,7 +62,7 @@ public class ReceiverConfiguration {
             MessageInfoExtractor extractor,
             InfoStorage infoStorage,
             ContentStorage contentStorage,
-            SagaSender sagaSender) {
-        return new ReceiverControllerImpl(extractor, infoStorage, contentStorage, sagaSender);
+            KafkaSender kafkaSender) {
+        return new ReceiverControllerImpl(extractor, infoStorage, contentStorage, kafkaSender);
     }
 }

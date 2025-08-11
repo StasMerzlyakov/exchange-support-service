@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 public class ReceiverProperties {
     String nextTopic;
     Duration kafkaWaitTimeout;
-    String xmlFileName;
     String blobStorageHost;
     int blobStoragePort;
     Duration cacheRefreshTimeout;
