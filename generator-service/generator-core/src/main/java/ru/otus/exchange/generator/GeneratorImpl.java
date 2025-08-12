@@ -49,7 +49,7 @@ public class GeneratorImpl implements Generator {
         }
 
         KafkaMessage jsonKafkaMessage =
-                new KafkaMessage(kafkaMessage.getExchange(), jsonID.toString(), Discriminator.EXCHANGE_JSON);
+                new KafkaMessage(kafkaMessage.getExchange(), actualID.toString(), Discriminator.EXCHANGE_JSON);
 
         kafkaSender.send(jsonKafkaMessage);
     }

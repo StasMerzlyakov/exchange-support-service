@@ -1,7 +1,0 @@
-FROM openjdk:21
-
-COPY ./build/generator-spring.jar /generator-spring.jar
-
-ENV JAVA_OPTS=""
-
-ENTRYPOINT exec java $JAVA_OPTS -jar /generator-spring.jar

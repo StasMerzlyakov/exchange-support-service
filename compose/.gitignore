@@ -1,4 +1,2 @@
-build
-minio
-receiverdb
-kafka
+run/data
+build/build

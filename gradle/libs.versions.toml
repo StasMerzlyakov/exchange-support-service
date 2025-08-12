@@ -93,6 +93,7 @@ validation-api = "3.0.2"
 openapui = "2.8.9"
 flyway = "11.7.2"
 postgresql = "42.7.7"
+hc-jmx = "3.1.0"
 
 [plugins]
 freefair-lombok = { id = "io.freefair.lombok", version.ref = "lombok-plugin" }
@@ -138,6 +139,7 @@ spring-boot-starter-data-redis-reactive = { group = "org.springframework.boot", 
 spring-cloud-starter-gateway-server-webflux = { group = "org.springframework.cloud", name = "spring-cloud-starter-gateway-server-webflux" }
 starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
 starter-aop = { group = "org.springframework.boot", name = "spring-boot-starter-aop" }
+spring-boot-starter-data-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis" }
 spring-context = { module = "org.springframework:spring-context", version.ref = "spring" }
 json-smart = { module = "net.minidev:json-smart", version.ref = "json-smart" }
 commons-codec = { module = "commons-codec:commons-codec", version.ref = "commons-codec" }

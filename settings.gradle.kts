@@ -54,3 +54,8 @@ include("models:json")
 findProject(":models:json")?.name = "json"
 include("generator-service:generator-spring")
 findProject(":generator-service:generator-spring")?.name = "generator-spring"
+include("sender-service")
+include("sender-service:sender-core")
+findProject(":sender-service:sender-core")?.name = "sender-core"
+include("sender-service:sender-spring")
+findProject(":sender-service:sender-spring")?.name = "sender-spring"

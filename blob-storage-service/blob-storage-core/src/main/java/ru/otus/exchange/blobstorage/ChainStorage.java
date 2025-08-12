@@ -18,8 +18,10 @@ public class ChainStorage implements Storage {
     @Override
     public Mono<StorageData> read(StorageKey storageKey) {
         return current.read(storageKey)
-                .switchIfEmpty(Mono.defer(
-                        () -> next.read(storageKey).doOnNext(storageData -> current.write(storageKey, storageData))))
+                .switchIfEmpty(Mono.defer(() -> {
+                    log.info("restore cache {}", storageKey);
+                    return next.read(storageKey).doOnNext(storageData -> current.write(storageKey, storageData));
+                }))
                 .doOnError(Mono::error);
     }
 

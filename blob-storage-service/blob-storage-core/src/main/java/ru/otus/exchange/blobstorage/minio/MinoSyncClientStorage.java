@@ -120,8 +120,8 @@ public class MinoSyncClientStorage implements InternalSyncStorage {
 
     @Override
     public ByteBuffer readObject(StorageKey storageKey) {
+        var objectPath = toObjectPath(storageKey);
         try {
-            var objectPath = toObjectPath(storageKey);
             ByteBuffer byteBuffer;
             try (InputStream stream = minioClient.getObject(GetObjectArgs.builder()
                     .bucket(minioConfig.bucket())
@@ -132,6 +132,7 @@ public class MinoSyncClientStorage implements InternalSyncStorage {
                 byteBuffer.put(bytes);
                 byteBuffer.flip();
             }
+            log.info("object by {} found", objectPath);
             return byteBuffer;
         } catch (ErrorResponseException re) {
             if (!NO_SUCH_KEY.equals(re.errorResponse().code())) {
@@ -140,14 +141,15 @@ public class MinoSyncClientStorage implements InternalSyncStorage {
         } catch (Exception e) {
             log.error("readObject error", e);
         }
+        log.warn("object by {} not found", objectPath);
         return null;
     }
 
     @Override
     public boolean removeObject(StorageKey storageKey) {
-        log.info("removeObject {}", storageKey);
-        String objectPath;
-        objectPath = toObjectPath(storageKey);
+
+        String objectPath = toObjectPath(storageKey);
+        log.info("removeObject {}", objectPath);
         try {
             minioClient.removeObject(RemoveObjectArgs.builder()
                     .bucket(minioConfig.bucket())
@@ -170,6 +172,7 @@ public class MinoSyncClientStorage implements InternalSyncStorage {
     @Override
     public boolean removeMetadata(StorageKey storageKey) {
         var objectPath = toObjectPath(storageKey);
+        log.info("removeMetadata {}", objectPath);
         try {
             minioClient.deleteObjectTags(DeleteObjectTagsArgs.builder()
                     .bucket(minioConfig.bucket())

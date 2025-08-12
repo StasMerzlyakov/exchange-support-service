@@ -1,8 +1,7 @@
 #!/bin/bash
 #
 
-rm -rf minio/data
-mkdir -p minio/data
+mkdir -p data/kafka
 
 docker compose up
 docker-compose rm -fsv

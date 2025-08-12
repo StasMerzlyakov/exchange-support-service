@@ -1,7 +1,0 @@
-FROM openjdk:21
-
-COPY ./build/gateway-service.jar /gateway.jar
-
-ENV JAVA_OPTS=""
-
-ENTRYPOINT exec java $JAVA_OPTS -jar /gateway.jar

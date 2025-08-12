@@ -28,7 +28,7 @@
 
 ![context](./docs/architecture/c4-context.drawio.png)
 
-Будет реализовано пять java-сервисов: GateWay, Receiver, BlobStorage, Generator, Sender, а так же использованы ряд 
+Реализовано пять java-сервисов: GateWay, Receiver, BlobStorage, Generator, Sender, а так же использованы ряд 
 готовых контейнеров.
 
 ![containers](./docs/architecture/c4-containers.drawio.png)
@@ -40,6 +40,10 @@
 ему нет разницы - реальный ли это блоб или ссылка.
 
 [Описание работы с блобами](docs/adr/002-blob-references.md)
+
+## compose
+Папка, в которой собраны скрипты для сборки контейнеров, docker-compose для запуска(через run.sh) и 
+jmeter скрипт (test.jmx; запускаю через send_test.sh)
 
 ## common
 Содержит общие константы, типы данных и утилиты для разбора XML и сборки JSON
@@ -181,29 +185,26 @@ java - сервис, отвечающий за генерацию json в зав
 ![generator-kafka]((docs/img/06-01-generator-kafka.png)
 ![generator-s3]((docs/img/06-01-generator-s3.png)
 
-#### ----------------------------- Все что ниже TODO -------------------------------------
-
 
 ## Sender
 java - сервис, отвечающий за отправку данных.
 
-- извлекает из ZSET сообщение в виде base64url(processGUID, jsonID, receiverDepartmentCode)
-- вносит в БД данные об отправке
-- по шедулеру определяет то, что нужно отправить, определяет url по receiverDepartmentCode, восстанавливает полный json и отправляет данные (select for update skip locked)
+- извлекает из kafka сообщение вида:
+```json
+{
+  "exchange":"01989806-146c-7ebe-b0a7-bb2042538cb0",
+  "key":"04a287a7-6c37-43e1-9e6d-9736fd4e32e4",
+  "discriminator":"exchangeJson"}
+```
 
-Траселог:
-- прием запросов на отправку через redis
-- отправка данных
+- вносит в БД данные об отправке
+- отправялет данные в нужные ендпоинты (вспомагательные сервисы extservice1 и extservice2)
 
 Метрики:
 - кол-во отправок по url
 - скорость отправки данных (rpm)
 - кол-во ошибок при отправках по url
+- cpu
+- ram
 
-Актуатор:
-- включение/отключение отправки на данный департамент через kafka
-
-# Дополнения
-- есть желание добавить в базовые контейнеры добавить возможность получения результата работы jcmd по снятию jfr для целевого процесса
-- для отладки работы предполагается использовать docker-compose/для развертывания облако на yandex-cloud
 

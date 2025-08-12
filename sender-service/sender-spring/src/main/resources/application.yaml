@@ -1,7 +1,7 @@
 server:
   port: 8081
 
-serviceId: generator
+serviceId: sender
 
 spring:
   kafka:
@@ -16,36 +16,38 @@ spring:
       auto-offset-reset: earliest
       properties:
         spring.json.trusted.packages: "ru.otus.exchange.common"
-
+  data:
+    redis:
+      host: redis
+      port: 6379
   datasource:
-    url: jdbc:postgresql://generatordb:5432/generator_db
-    username: generator
-    password: generator
+    url: jdbc:postgresql://senderdb:5432/sender_db
+    username: sender
+    password: sender
     driver-class-name: org.postgresql.Driver
 
-# blobStorage type grpc or dummy
-blobStorageType: grpc
-
-# kafkaSenderType type kafka or dummy
-kafkaSenderType: kafka
-
-# dbStorageType type jdbc or dummy
-dbStorageType: jdbc
-
-generator:
-  kafka-wait-timeout: 1s
-  from-topic: to_generator_topic
-  next-topic: to_send_topic
+sender:
+  from-topic: to_send_topic
   blob-storage-host: blobstorage
   blob-storage-port: 9090
+  send-limit: 10
+  lock-prefix: department-
+  lock-duration: 10s
+  cache-refresh-timeout: 10s
+  max-conn-per-route: 2000
+  max-conn-total: 2000
+  connection-timeout-mls: 5000
+  keep-alive-mls: 5000
+
 management:
   server:
     port: 7000
   endpoint:
     prometheus:
-      #  fullacces by default; (see hasRole('ROLE_ADMIN'), authenticated)
+      #  full access by default; (see hasRole('ROLE_ADMIN'), authenticated)
       access: unrestricted
   endpoints:
     web:
       exposure:
         include: prometheus
+

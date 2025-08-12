@@ -15,42 +15,75 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">1</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="receive">
-          <stringProp name="HTTPSampler.path">http://receiver:8081/api/v1/api/v1.0</stringProp>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="-1440012446">messageid</stringProp>
+            <stringProp name="3530753">size</stringProp>
+            <stringProp name="3076010">data</stringProp>
+            <stringProp name="772772249">dataBase64</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="948161629">
+              <stringProp name="803264237">${__RandomString(25, 0123456789)}</stringProp>
+              <stringProp name="1563151643">500000</stringProp>
+              <stringProp name="-1158167518">${__RandomString(${size}, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="1396030628">${__base64Encode(${data})}</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="receive" enabled="true">
+          <stringProp name="HTTPSampler.path">http://gateway:8080/receive</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
-            <collectionProp name="HTTPFileArgs.files">
-              <elementProp name="/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/compose/test.xml" elementType="HTTPFileArg">
-                <stringProp name="File.mimetype">application/xml</stringProp>
-                <stringProp name="File.path">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/compose/test.xml</stringProp>
-                <stringProp name="File.paramname"></stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${__FileToString(/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/compose/test.xml,,)}</stringProp>
+                <stringProp name="Argument.value">&lt;env:Envelope xmlns:env=&quot;http://exchange.support/envelope&quot; xmlns:add=&quot;http://exchange.support/header/addressing&quot; xmlns:faul=&quot;http://exchange.support/utility/fault&quot; xmlns:not=&quot;http://exchange.support/utility/notification&quot; xmlns:exc=&quot;http://exchange.support/messages/exchange&quot;&gt;&#xd;
+  &lt;env:Header&gt;&#xd;
+    &lt;add:Addressing&gt;&#xd;
+      &lt;add:MessageID&gt;${messageid}&lt;/add:MessageID&gt;&#xd;
+      &lt;add:From&gt;123456789&lt;/add:From&gt;&#xd;
+      &lt;add:To&gt;333444555&lt;/add:To&gt;&#xd;
+    &lt;/add:Addressing&gt;&#xd;
+  &lt;/env:Header&gt;&#xd;
+  &lt;env:Body&gt;&#xd;
+    &lt;exc:ExchangeMessage&gt;&#xd;
+      &lt;exc:PersonDataType&gt;&#xd;
+        &lt;exc:FirstName&gt;Иванов&lt;/exc:FirstName&gt;&#xd;
+        &lt;exc:LastName&gt;Иван&lt;/exc:LastName&gt;&#xd;
+        &lt;exc:Patronymic&gt;Иванович&lt;/exc:Patronymic&gt;&#xd;
+        &lt;exc:BirthDate&gt;&#xd;
+          &lt;exc:year&gt;2000&lt;/exc:year&gt;&#xd;
+          &lt;exc:month&gt;--01&lt;/exc:month&gt;&#xd;
+          &lt;exc:day&gt;---15&lt;/exc:day&gt;&#xd;
+        &lt;/exc:BirthDate&gt;&#xd;
+        &lt;exc:Gender&gt;М&lt;/exc:Gender&gt;&#xd;
+      &lt;/exc:PersonDataType&gt;&#xd;
+      &lt;exc:Photo&gt;${dataBase64}&lt;/exc:Photo&gt;&#xd;
+    &lt;/exc:ExchangeMessage&gt;&#xd;
+  &lt;/env:Body&gt;&#xd;
+&lt;/env:Envelope&gt;</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="content-type: application/xml">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="ContentType" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
+                <stringProp name="Header.value">application/octet-stream</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
