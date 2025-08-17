@@ -1,10 +1,10 @@
-# Cервис поддержки обмена данными (data exchange support service)
+# Cервис сопровождения ведомственных взаимодействий (data exchange support service)
 
 ## Преамбула
 
 По работе занимаемся организацией межведомственного обмена, когда данные одного ведомства нужно передать в другое.
 Такой обмен сопровождается:
-- контролем входных данных (в случае, если канал связи недоверенный - проверка на вирусы, вложения, инъекции и т.д.; для всех - проверка формата сообщения, проверка электронной подписи в разных форматах)
+- контролем входных данных (проверка формата сообщения, проверка электронной подписи в разных форматах и т.д.)
 - изменением формата данных (как правило, XML одного формата в XML другого формата; иногда json)
 - отправка данных
 - контролем доставки (проверка того, что на каждое отправленное в ведомство сообщение было подтверждение)
@@ -42,17 +42,16 @@
 [Описание работы с блобами](docs/adr/002-blob-references.md)
 
 ## compose
-Папка, в которой собраны скрипты для сборки контейнеров, docker-compose для запуска(через run.sh) и 
-jmeter скрипт (test.jmx; запускаю через send_test.sh)
+Папка, в которой собраны скрипты для сборки контейнеров (compose/build), и (compose/run) скрипты для запуска 
+docker-compose (run.sh) для запуска нагрузки скрипт (test.jmx; запускаю через send_test.sh)
 
 ## common
 Содержит общие константы, типы данных и утилиты для разбора XML и сборки JSON
 [common](common/README.md)
 
-
 ## gateway 
-SpringCloudGateway reactive - сервис. Принимает данные, от внешней системы по определенном ендпоинту, делает проверу, 
-добавляет processId и роутит их на Receiver. 
+SpringCloudGateway reactive - сервис. Принимает данные, от внешней системы по определенном ендпоинту, делает проверку, 
+добавляет processId и отправляет их на Receiver. 
 
 Фильтры:
 - RPM 10/min (RequestRateLimiter gateway filter cluster на redis) 
@@ -63,8 +62,8 @@ SpringCloudGateway reactive - сервис. Принимает данные, о�
 ### Используемые навыки:
 1. 14 - Разбор JMeter и организация нагрузочного тестирования (gateway-service/gateway-jmeter.jmx, blob-storage-service/blob-storage-spring/blob-stroage-grpc.jmx). 
 2. 23 - Реактивное программирование: Профилирование приложения на Reactor  (ValidateInputXMLGatewayFilterFactory.apply - onSuccess, onError)
-4. 31 - Проектирование и архитектура в разрезе микросервисов (API Gateway)
-5. 37 - Шаблоны проектирования отказоустойчивого сервиса (Resilience4j CircuitBreaker) (application.yaml)
+3. 31 - Проектирование и архитектура в разрезе микросервисов (API Gateway)
+4. 37 - Шаблоны проектирования отказоустойчивого сервиса (Resilience4j CircuitBreaker) (application.yaml)
 
 [Описание настроек для gateway](docs/adr/001-gateway-hints.md)
 
@@ -182,8 +181,8 @@ java - сервис, отвечающий за генерацию json в зав
   "key":"04a287a7-6c37-43e1-9e6d-9736fd4e32e4",
   "discriminator":"exchangeJson"}
 ```
-![generator-kafka]((docs/img/06-01-generator-kafka.png)
-![generator-s3]((docs/img/06-01-generator-s3.png)
+![generator-kafka](docs/img/06-01-generator-kafka.png)
+![generator-s3](docs/img/06-01-generator-s3.png)
 
 
 ## Sender
@@ -200,11 +199,21 @@ java - сервис, отвечающий за отправку данных.
 - вносит в БД данные об отправке
 - отправялет данные в нужные ендпоинты (вспомагательные сервисы extservice1 и extservice2)
 
+### Используемые навыки:
+1. 28 - Метрики
+2. 29 - Prometheus & Grafana
+
 Метрики:
-- кол-во отправок по url
-- скорость отправки данных (rpm)
-- кол-во ошибок при отправках по url
+- rps to extservice1
+- rps to extservice2
 - cpu
 - ram
 
+Статус отправки в сервис extservice1 устанавливаю через БД (jdbc:postgresql://senderdb:5432/sender_db; sender sender) и 
+наблюдаю за изменениями в графике:
 
+
+![extservice1-off-db](docs/img/07-01-extservice1-off-db.png)
+![extservice1-off-grafana](docs/img/07-02-extservice1-off-grafana.png)
+![extservice1-on-db](docs/img/07-03-extservice1-on-db.png)
+![extservice1-on-grafana](docs/img/07-04-extservice1-on-grafana.png)

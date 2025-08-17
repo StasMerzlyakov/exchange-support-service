@@ -49,5 +49,15 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: health, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+      sla:
+        http:
+          server:
+            requests: 100ms, 150ms, 250ms, 500ms, 1s
 

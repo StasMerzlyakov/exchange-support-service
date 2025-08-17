@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import ru.otus.exchange.blobutils.*;
 import ru.otus.exchange.sender.AsyncMessageUploaderStarter;
 import ru.otus.exchange.sender.core.MessageSenderImpl;
@@ -19,6 +20,7 @@ import ru.otus.exchange.sender.core.api.MessageSender;
 @EnableCaching
 @EnableAsync
 @EnableKafka
+@EnableScheduling
 public class SenderConfiguration {
 
     @Bean

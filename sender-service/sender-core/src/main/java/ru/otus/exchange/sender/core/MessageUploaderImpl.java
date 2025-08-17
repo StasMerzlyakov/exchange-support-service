@@ -107,15 +107,18 @@ public class MessageUploaderImpl implements MessageUploader {
         log.info("sendMessage start");
 
         while (runProcess.get()) {
-            boolean messageFound = false;
+            final AtomicBoolean messageFound = new AtomicBoolean(true);
             List<Department> departmentList = dbStorage.getDepartments();
-            for (Department department : departmentList) {
-                if (processDepartment(department)) {
-                    messageFound = true;
-                }
-            }
+            CompletableFuture<?>[] futureList = departmentList.stream()
+                    .map(dep -> CompletableFuture.runAsync(() -> {
+                        var result = processDepartment(dep);
+                        messageFound.compareAndSet(true, result);
+                    }))
+                    .toArray(CompletableFuture[]::new);
+            CompletableFuture<Void> allOff = CompletableFuture.allOf(futureList);
+            allOff.join();
 
-            if (!messageFound) {
+            if (!messageFound.get()) {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {

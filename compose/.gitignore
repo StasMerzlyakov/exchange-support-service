@@ -1,2 +1,4 @@
 run/data
 build/build
+jmeter.log
+TestResults.csv

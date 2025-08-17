@@ -31,7 +31,7 @@ public class DBStorageImpl implements DBStorage {
     @CacheEvict(value = "departments", allEntries = true)
     @Scheduled(fixedRateString = "${sender.cache-refresh-timeout}")
     public void emptyDepartmentsCache() {
-        log.info("emptying departments cache");
+        log.info("!!!! ✅ emptying departments cache");
     }
 
     @Override
