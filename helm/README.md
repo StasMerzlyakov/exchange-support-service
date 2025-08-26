@@ -89,4 +89,33 @@ yc managed-kubernetes cluster create --name diplom-cluster --network-name otus-a
 yc managed-kubernetes cluster get-credentials  diplom-cluster --external
 ```
 
+### Создание ingres-сервисного аккаунта
+```
+# https://yandex.cloud/ru/docs/managed-kubernetes/operations/applications/alb-ingress-controller
+yc iam service-account create --name diplom-ingr
+yc resource-manager folder add-access-binding $FOLDER_ID --role alb.editor  --subject serviceAccount:$ACCOUNT_ID
+yc resource-manager folder add-access-binding $FOLDER_ID --role vpc.publicAdmin   --subject serviceAccount:$ACCOUNT_ID
+yc resource-manager folder add-access-binding $FOLDER_ID --role certificate-manager.certificates.downloader --subject serviceAccount:$ACCOUNT_ID
+yc resource-manager folder add-access-binding $FOLDER_ID --role compute.viewer  --subject serviceAccount:$ACCOUNT_ID
+yc resource-manager folder add-access-binding $FOLDER_ID --role smart-web-security.editor   --subject serviceAccount:$ACCOUNT_ID
+yc iam key create --service-account-id $ACCOUNT_ID --output sa-key.json
+# проверяем логин
+cat sa-key.json | helm registry login cr.yandex --username 'json_key' --password-stdin
+>> Login Succeeded
+```
+
+### Создание узлов для запуска
+```
+yc managed-kubernetes node-group create  --cluster-name diplom-cluster  --fixed-size 1  \
+  --location zone=ru-central1-d,subnet-id=$SUBNET_ID --name diplom-group
+>> id: .... <--- NODE_GROUP_ID
+
+# доступ для скачивания образов из интернета (см базовый образ в Dockerfile)
+export NODE_GROUP_ID=XXXX
+yc managed-kubernetes node-group update $NODE_GROUP_ID --network-interface \
+    security-group-ids=$GROUP_ID,ipv4-address=nat,subnets=$SUBNET_ID
+```
+
+## Подготовка чартов
+
 
