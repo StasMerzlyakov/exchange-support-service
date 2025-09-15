@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+  <Header>
+    <Addressing p5:Id="AddressingHeader" xmlns:p5="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns="http://xsd.gspvd/v001/addressing">
+      <LifecycleInfo>
+        <LifecycleID>2000997012019040800004245</LifecycleID>
+      </LifecycleInfo>
+      <To>200007701</To>
+      <To>100000003</To>
+      <From>
+        <Address>200007701</Address>
+      </From>
+      <ReplyTo>
+        <Address>200007701</Address>
+      </ReplyTo>
+      <Relations p5:Id="Relations">
+        <RelatesTo>
+          <ReferenceQName xmlns:q1="http://schemas.xmlsoap.org/soap/envelope/">q1:Form</ReferenceQName>
+          <MessageID>2000077012019042503315560</MessageID>
+          <Reference>
+            <Transforms xmlns="http://www.w3.org/2000/09/xmldsig#">
+              <Transform p12:Algorithm="http://www.w3.org/2010/xmldsig2#transform" xmlns:p12="http://www.w3.org/2000/09/xmldsig#">
+                <Selection p14:URI="#SignedInfo" p14:Algorithm="http://www.w3.org/2010/xmldsig2#xml" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#" />
+                <Canonicalization p14:Algorithm="http://www.w3.org/2010/xml-c14n2" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <IgnoreComments xmlns="http://www.w3.org/2010/xml-c14n2">true</IgnoreComments>
+                  <TrimTextNodes xmlns="http://www.w3.org/2010/xml-c14n2">true</TrimTextNodes>
+                  <PrefixRewrite xmlns="http://www.w3.org/2010/xml-c14n2">sequential</PrefixRewrite>
+                  <QNameAware xmlns="http://www.w3.org/2010/xml-c14n2" />
+                </Canonicalization>
+                <Verifications xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <Verification p15:DigestDataLength="32" xmlns:p15="http://www.w3.org/2010/xmldsig2#" />
+                </Verifications>
+              </Transform>
+            </Transforms>
+            <DigestMethod p11:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411" xmlns:p11="http://www.w3.org/2000/09/xmldsig#" xmlns="http://www.w3.org/2000/09/xmldsig#" />
+            <DigestValue xmlns="http://www.w3.org/2000/09/xmldsig#">HZxEVX3G1XpAr3hTQ75vdyzmCyO4zGMMnPXWq9s9efQ=</DigestValue>
+          </Reference>
+        </RelatesTo>
+      </Relations>
+      <MessageID>2000077012019042503315561</MessageID>
+    </Addressing>
+    <Security xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+      <Timestamp p6:Id="TIMESTAMP" xmlns:p6="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+        <p6:Created p6:Id="CREATED">2019-04-25T13:03:27.8894103Z</p6:Created>
+      </Timestamp>
+      <Signature p6:Id="Signature" xmlns:p6="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo p6:Id="SignedInfo">
+          <CanonicalizationMethod p10:Algorithm="http://www.w3.org/2010/xml-c14n2" xmlns:p10="http://www.w3.org/2010/xmldsig2#">
+            <IgnoreComments xmlns="http://www.w3.org/2010/xml-c14n2">true</IgnoreComments>
+            <TrimTextNodes xmlns="http://www.w3.org/2010/xml-c14n2">true</TrimTextNodes>
+            <PrefixRewrite xmlns="http://www.w3.org/2010/xml-c14n2">sequential</PrefixRewrite>
+            <QNameAware xmlns="http://www.w3.org/2010/xml-c14n2" />
+          </CanonicalizationMethod>
+          <SignatureMethod p10:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102001-gostr3411" xmlns:p10="http://www.w3.org/2000/09/xmldsig#" />
+          <Reference>
+            <Transforms>
+              <Transform p12:Algorithm="http://www.w3.org/2010/xmldsig2#transform" xmlns:p12="http://www.w3.org/2000/09/xmldsig#">
+                <Selection p14:URI="#AddressingHeader" p14:Algorithm="http://www.w3.org/2010/xmldsig2#xml" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#" />
+                <Canonicalization p14:Algorithm="http://www.w3.org/2010/xml-c14n2" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <IgnoreComments xmlns="http://www.w3.org/2010/xml-c14n2">true</IgnoreComments>
+                  <TrimTextNodes xmlns="http://www.w3.org/2010/xml-c14n2">true</TrimTextNodes>
+                  <PrefixRewrite xmlns="http://www.w3.org/2010/xml-c14n2">sequential</PrefixRewrite>
+                  <QNameAware xmlns="http://www.w3.org/2010/xml-c14n2">
+                    <Element p17:Name="ReferenceQName" p17:NS="http://xsd.gspvd/v001/addressing" xmlns:p17="http://www.w3.org/2010/xml-c14n2" />
+                  </QNameAware>
+                </Canonicalization>
+                <Verifications xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <Verification p15:DigestDataLength="32" xmlns:p15="http://www.w3.org/2010/xmldsig2#" />
+                </Verifications>
+              </Transform>
+            </Transforms>
+            <DigestMethod p11:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411" xmlns:p11="http://www.w3.org/2000/09/xmldsig#" />
+            <DigestValue>A3SjALm3SzlJ8pHOEdnb0ariUu5WaijC4wohOFySsl4=</DigestValue>
+          </Reference>
+          <Reference>
+            <Transforms>
+              <Transform p12:Algorithm="http://www.w3.org/2010/xmldsig2#transform" xmlns:p12="http://www.w3.org/2000/09/xmldsig#">
+                <Selection p14:URI="#TIMESTAMP" p14:Algorithm="http://www.w3.org/2010/xmldsig2#xml" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#" />
+                <Canonicalization p14:Algorithm="http://www.w3.org/2010/xml-c14n2" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <IgnoreComments xmlns="http://www.w3.org/2010/xml-c14n2">true</IgnoreComments>
+                  <TrimTextNodes xmlns="http://www.w3.org/2010/xml-c14n2">true</TrimTextNodes>
+                  <PrefixRewrite xmlns="http://www.w3.org/2010/xml-c14n2">sequential</PrefixRewrite>
+                  <QNameAware xmlns="http://www.w3.org/2010/xml-c14n2" />
+                </Canonicalization>
+                <Verifications xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <Verification p15:DigestDataLength="32" xmlns:p15="http://www.w3.org/2010/xmldsig2#" />
+                </Verifications>
+              </Transform>
+            </Transforms>
+            <DigestMethod p11:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411" xmlns:p11="http://www.w3.org/2000/09/xmldsig#" />
+            <DigestValue>nHo687G7Nqtki+oGHmWZx4bPSgFPQR9cGKVMSE2JR7M=</DigestValue>
+          </Reference>
+          <Reference>
+            <Transforms>
+              <Transform p12:Algorithm="http://www.w3.org/2010/xmldsig2#transform" xmlns:p12="http://www.w3.org/2000/09/xmldsig#">
+                <Selection p14:URI="#x509Cert" p14:Algorithm="http://www.w3.org/2010/xmldsig2#xml" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#" />
+                <Canonicalization p14:Algorithm="http://www.w3.org/2010/xml-c14n2" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <IgnoreComments xmlns="http://www.w3.org/2010/xml-c14n2">true</IgnoreComments>
+                  <TrimTextNodes xmlns="http://www.w3.org/2010/xml-c14n2">true</TrimTextNodes>
+                  <PrefixRewrite xmlns="http://www.w3.org/2010/xml-c14n2">sequential</PrefixRewrite>
+                  <QNameAware xmlns="http://www.w3.org/2010/xml-c14n2" />
+                </Canonicalization>
+                <Verifications xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <Verification p15:DigestDataLength="32" xmlns:p15="http://www.w3.org/2010/xmldsig2#" />
+                </Verifications>
+              </Transform>
+            </Transforms>
+            <DigestMethod p11:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411" xmlns:p11="http://www.w3.org/2000/09/xmldsig#" />
+            <DigestValue>nmlh8ImwM5MFVhTXHHETFCQ3CxlwGzVLRBGT3QVBQEM=</DigestValue>
+          </Reference>
+          <Reference>
+            <Transforms>
+              <Transform p12:Algorithm="http://www.w3.org/2010/xmldsig2#transform" xmlns:p12="http://www.w3.org/2000/09/xmldsig#">
+                <Selection p14:URI="#MessageBody" p14:Algorithm="http://www.w3.org/2010/xmldsig2#xml" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#" />
+                <Canonicalization p14:Algorithm="http://www.w3.org/2010/xml-c14n2" xmlns:p14="http://www.w3.org/2010/xmldsig2#" xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <IgnoreComments xmlns="http://www.w3.org/2010/xml-c14n2">true</IgnoreComments>
+                  <TrimTextNodes xmlns="http://www.w3.org/2010/xml-c14n2">true</TrimTextNodes>
+                  <PrefixRewrite xmlns="http://www.w3.org/2010/xml-c14n2">sequential</PrefixRewrite>
+                  <QNameAware xmlns="http://www.w3.org/2010/xml-c14n2">
+                    <Element p17:Name="Faultcode" p17:NS="http://xsd.gspvd/v001/utility/faults" xmlns:p17="http://www.w3.org/2010/xml-c14n2" />
+                  </QNameAware>
+                </Canonicalization>
+                <Verifications xmlns="http://www.w3.org/2010/xmldsig2#">
+                  <Verification p15:DigestDataLength="32" xmlns:p15="http://www.w3.org/2010/xmldsig2#" />
+                </Verifications>
+              </Transform>
+            </Transforms>
+            <DigestMethod p11:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411" xmlns:p11="http://www.w3.org/2000/09/xmldsig#" />
+            <DigestValue>IX0K5urWZ2fPiX9oYcQrPeGYY+xEQcTWD/rZ0iTNlUw=</DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>g1qem16lIVYLHr+yGGZpP7R1M3nbbrL+tjiEbPJmPlrUQG/8uPul/F6zA6q4jqVcJj0eE6xmkIY7uUBiqfEsXA==</SignatureValue>
+        <KeyInfo p6:Id="x509Cert">
+          <X509Data>
+            <X509Certificate>MIIDuTCCA2igAwIBAgILAI+XD2IAAAAC7zMwCAYGKoUDAgIDMIHQMSYwJAYJKoZIhvcNAQkBFhdib3J6YWtvdkBuaWkudm9za2hvZC5ydTELMAkGA1UEBhMCUlUxFTATBgNVBAcMDNCc0L7RgdC60LLQsDEnMCUGA1UECgwe0KTQk9Cj0J8g0J3QmNCYICLQktCe0KHQpdCe0JQiMVkwVwYDVQQDDFDQk9C70LDQstC90YvQuSDRg9C00L7RgdGC0L7QstC10YDRj9GO0YnQuNC5INGG0LXQvdGC0YAg0YHQuNGB0YLQtdC80Ysg0J/QktCU0J3QnzAeFw0xNjEyMDExNDMxMjlaFw0yMTExMzAxNDMxMjlaMIH7MUgwRgYDVQQDDD/QnNC+0YHQuNC10LLQuNGHINCc0LDRgNC40Y8g0JLQuNC60YLQvtGA0L7QstC90LAg0K3QptCfINGA0LXQty4xITAfBgNVBAsMGNCa0JQg0JzQmNCUINCg0L7RgdGB0LjQuDEcMBoGA1UECgwT0JzQmNCUINCg0L7RgdGB0LjQuDFMMEoGA1UEBwxD0LMu0JzQvtGB0LrQstCwIDEg0J3QtdC+0L/QsNC70LjQvNC+0LLRgdC60LjQuSDQv9GA0LXRg9C70L7QuiDQtC4xMjELMAkGA1UEBhMCUlUxEzARBgkqhkiG9w0BCQEWBG1haWwwYzAcBgYqhQMCAhMwEgYHKoUDAgIkAAYHKoUDAgIeAQNDAARAa/T38SdtKtL2dXgdQf/rK7HB1o35zyJSyBmFnngTKbB4+pwMg0920z5TPjq1tZQC2jtDF5V8J/TZaJNif8kFJ6OB8zCB8DBSBgNVHSUBAf8ESDBGBggrBgEFBQcDAgYIKwYBBQUHAwQGCCqFAwIZAQIBBggqhQMCGQECAgYIKoUDAhkBAggGCCqFAwIZAQIQBggqhQMCGQECQDAOBgNVHQ8BAf8EBAMCA7gwHwYDVR0jBBgwFoAU6SLIjUGFfevUCrGK62q1LLhpHY8wSgYDVR0SBEMwQYEApD0wOzE5MDcGA1UEAwww0JfQsNGF0LDRgNC+0LIg0JDQvdC00YDQtdC5INCS0LDQu9C10YDQuNC10LLQuNGHMB0GA1UdDgQWBBRyVJcL8HtKFEQjdGqpe0yOeKZK4TAIBgYqhQMCAgMDQQA6JPHsiR13pM2cqHnW+QzA4Z33YO+UdW+DpHEzj3YCXtjvICYXhZUgCS5PSSQdkGgLEr4FQ6Q2R+GWFLO+vVBS</X509Certificate>
+          </X509Data>
+        </KeyInfo>
+      </Signature>
+    </Security>
+  </Header>
+  <Body p4:Id="MessageBody" xmlns:p4="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <AllowedPersonalization>
+      <SimpleAllowedPersonalization p7:fromPGS="false" xmlns:p7="http://xsd.gspvd/v001/common-data" xmlns="http://xsd.gspvd/v001/personalization/allowed">
+        <p7:LifecycleID>2000997012019040800004245</p7:LifecycleID>
+        <p7:InitiatorDepartment>200099701</p7:InitiatorDepartment>
+        <p7:DocumentType>P</p7:DocumentType>
+        <p7:State>Допущена к изготовлению</p7:State>
+        <IssueDate>2019-04-25</IssueDate>
+        <ExpiryDate>2029-04-25</ExpiryDate>
+      </SimpleAllowedPersonalization>
+    </AllowedPersonalization>
+  </Body>
+</Envelope>

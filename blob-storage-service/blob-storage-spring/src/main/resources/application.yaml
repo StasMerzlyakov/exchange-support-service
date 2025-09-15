@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  grpc:
+    server:
+      port: 9090
+
+# byteArray byteBuffer
+memoryStorageType: byteArray
+
+# on off
+blockHound: off
+
+minio:
+  endpoint: http://minio:9000
+  accessKey: accessKey
+  secretKey: secretKey
+  bucket: bucket
+  opTimeout: 3s
+
+
+management:
+  server:
+    port: 7000
+  endpoint:
+    prometheus:
+      #  fullacces by default; (see hasRole('ROLE_ADMIN'), authenticated)
+      access: unrestricted
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+logging:
+  level:
+    root: INFO
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+  include-application-name: true

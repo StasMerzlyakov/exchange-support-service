@@ -1,0 +1,26 @@
+<env:Envelope xmlns:env="http://exchange.support/envelope" xmlns:add="http://exchange.support/header/addressing" xmlns:faul="http://exchange.support/utility/fault" xmlns:not="http://exchange.support/utility/notification" xmlns:exc="http://exchange.support/messages/exchange">
+  <env:Header>
+    <add:Addressing>
+      <add:MessageID>2222222222222222222222222</add:MessageID>
+      <add:From>123456789</add:From>
+      <add:To>333444555</add:To>
+      <add:ReplyTo>3333333333333333333333333</add:ReplyTo>
+    </add:Addressing>
+  </env:Header>
+  <env:Body>
+    <exc:ExchangeMessage>
+      <exc:PersonDataType>
+        <exc:FirstName>Иванов</exc:FirstName>
+        <exc:LastName>Иван</exc:LastName>
+        <exc:Patronymic>Иванович</exc:Patronymic>
+        <exc:BirthDate>
+          <exc:year>2000</exc:year>
+          <exc:month>--01</exc:month>
+          <exc:day>---15</exc:day>
+        </exc:BirthDate>
+        <exc:Gender>М</exc:Gender>
+      </exc:PersonDataType>
+      <exc:Photo>cHJlbWVyZQ==</exc:Photo>
+    </exc:ExchangeMessage>
+  </env:Body>
+</env:Envelope>

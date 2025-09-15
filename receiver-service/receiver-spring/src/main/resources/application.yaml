@@ -1,0 +1,48 @@
+server:
+  port: 8081
+springdoc:
+  api-docs.path: /api-docs
+  swagger-ui:
+    path: /api-docs-ui
+
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+  datasource:
+    url: jdbc:postgresql://receiverdb:5432/receiver_db
+    username: receiver
+    password: receiver
+    driver-class-name: org.postgresql.Driver
+
+# blobStorage type grpc or dummy
+blobStorageType: grpc
+
+# infoStorageType type jdbc or dummy
+infoStorageType: jdbc
+
+# kafkaSenderType type kafka or dummy
+kafkaSenderType: kafka
+
+receiver:
+  kafka-wait-timeout: 1s
+  next-topic: to_generator_topic
+  cache-refresh-timeout: 10s
+  blob-storage-host: blobstorage
+  blob-storage-port: 9090
+management:
+  server:
+    port: 7000
+  endpoint:
+    prometheus:
+      #  fullacces by default; (see hasRole('ROLE_ADMIN'), authenticated)
+      access: unrestricted
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

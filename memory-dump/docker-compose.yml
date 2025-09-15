@@ -1,0 +1,50 @@
+services:
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-03-12T18-04-18Z
+    container_name: minio
+    hostname: minio
+    ports:
+      - "9900:9000"
+      - "9901:9001"
+    networks:
+      - blob-load-net
+    volumes:
+      - ./minio/data:/data
+    environment:
+      MINIO_ROOT_USER: accessKey
+      MINIO_ROOT_PASSWORD: secretKey
+    command: [ "server", "--console-address", ":9001", "/data" ]
+  createbuckets:
+    image: quay.io/minio/mc:RELEASE.2025-03-12T17-29-24Z
+    depends_on:
+      - minio
+    restart: on-failure
+    networks:
+      - blob-load-net
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc alias set dockerminio http://minio:9000 accessKey secretKey;
+      /usr/bin/mc mb dockerminio/bucket;
+      exit 0;
+      "
+
+  blobstorage:
+    image: blobstorage-service-load:1.0
+    container_name: blobstorage
+    hostname: gateway
+    ports:
+      - "9090:9090"
+      - "7001:7000"
+      - "9010:9010"
+    networks:
+      - blob-load-net
+    depends_on:
+      - minio
+    volumes:
+      - ./blobstorage/dump:/dump
+
+networks:
+  blob-load-net:
+    driver: bridge
+

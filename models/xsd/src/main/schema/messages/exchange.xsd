@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:exch="http://exchange.support/messages/exchange"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://exchange.support/messages/exchange"
+           elementFormDefault="qualified"
+           attributeFormDefault="qualified">
+
+    <xsd:element name="ExchangeMessage" type="exch:ExchangeMessageType"/>
+
+    <xsd:complexType name="ExchangeMessageType">
+        <xsd:sequence>
+            <xsd:element name="PersonDataType" type="exch:PersonDataType"/>
+            <xsd:element name="Photo" type="exch:PhotoImageType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="PhotoImageType">
+        <xsd:restriction base="xsd:base64Binary">
+            <xsd:maxLength value="524288"/>
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="PersonDataType">
+        <xsd:sequence>
+            <xsd:element name="FirstName" type="exch:NameComponentType" minOccurs="0"/>
+            <xsd:element name="LastName" type="exch:NameComponentType" minOccurs="0"/>
+            <xsd:element name="Patronymic" type="exch:NameComponentType" minOccurs="0"/>
+            <xsd:element name="BirthDate" type="exch:BirthDateType"/>
+            <xsd:element name="Gender" type="exch:GenderType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="NameComponentType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+            <xsd:pattern value="[а-яА-ЯёЁ\sIVXLCDM'\.\-\(\)]{1,255}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="GenderType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="1"/>
+            <xsd:enumeration value="М">
+                <xsd:annotation>
+                    <xsd:documentation>мужской пол</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Ж">
+                <xsd:annotation>
+                    <xsd:documentation>женский пол</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="BirthDateType">
+        <xsd:sequence>
+            <xsd:element name="year">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:gYear">
+                        <xsd:minInclusive value="1900"/>
+                        <xsd:maxInclusive value="2200"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="month" type="xsd:gMonth" minOccurs="0"/>
+            <xsd:element name="day" type="xsd:gDay" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

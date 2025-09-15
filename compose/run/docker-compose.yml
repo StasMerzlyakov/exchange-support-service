@@ -1,0 +1,269 @@
+services:
+  gateway:
+    image: gateway-service:1.0
+    container_name: gateway
+    hostname: gateway
+    networks:
+      - exchange-net
+    depends_on:
+      - redis
+      - receiver
+      - zipkin
+
+  redis:
+    image: redis:8.0.3
+    container_name: redis
+    hostname: redis
+    networks:
+      - exchange-net
+
+  rclient:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    hostname: rclient
+    depends_on:
+      - redis
+    networks:
+      - exchange-net
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    hostname: zipkin
+    networks:
+      - exchange-net
+
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-03-12T18-04-18Z
+    container_name: minio
+    hostname: minio
+    networks:
+      - exchange-net
+    volumes:
+      - ./data/minio:/data
+    environment:
+      MINIO_ROOT_USER: accessKey
+      MINIO_ROOT_PASSWORD: secretKey
+    command: [ "server", "--console-address", ":9001", "/data" ]
+
+  createbuckets:
+    image: quay.io/minio/mc:RELEASE.2025-03-12T17-29-24Z
+    depends_on:
+      - minio
+    restart: on-failure
+    networks:
+      - exchange-net
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc alias set dockerminio http://minio:9000 accessKey secretKey;
+      /usr/bin/mc mb dockerminio/bucket;
+      exit 0;
+      "
+
+  blobstorage:
+    image: blobstorage-service:1.0
+    container_name: blobstorage
+    hostname: blobstorage
+    networks:
+      - exchange-net
+    depends_on:
+      - minio
+      - zipkin
+
+  receiverdb:
+    image: postgres:16-alpine
+    container_name: receiverdb
+    hostname: receiverdb
+    environment:
+      POSTGRES_USER: receiver
+      POSTGRES_PASSWORD: receiver
+      POSTGRES_DB: receiver_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data/receiverdb:/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U receiver -d receiver_db" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    networks:
+      - exchange-net
+
+  generatordb:
+    image: postgres:16-alpine
+    container_name: generatordb
+    hostname: generatordb
+    environment:
+      POSTGRES_USER: generator
+      POSTGRES_PASSWORD: generator
+      POSTGRES_DB: generator_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U generator -d generator_db" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./data/generatordb:/var/lib/postgresql/data/pgdata
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    networks:
+      - exchange-net
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka
+    container_name: kafka
+    environment:
+      KAFKA_KRAFT_MODE: "true"  # Enables KRaft mode.
+      KAFKA_PROCESS_ROLES: broker,controller  # Kafka acts as both controller and broker.
+      KAFKA_NODE_ID: 1  # Unique ID for the Kafka instance.
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@localhost:9093"  # Controller quorum.
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
+      KAFKA_LOG_DIRS: /var/lib/kafka/data  # Log storage location.
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"  # Enables automatic topic creation.
+      CLUSTER_ID: "Mk3OEYBSD34fcwNTJENDM2Qk"  # Unique Kafka cluster ID.
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    networks:
+      - exchange-net
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    hostname: kafdrop
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:9092"
+    networks:
+      - exchange-net
+    depends_on:
+      - kafka
+
+  receiver:
+    image: receiver-service:1.0
+    container_name: receiver
+    hostname: receiver
+    depends_on:
+      - kafka
+      - zipkin
+      - receiverdb
+      - blobstorage
+    networks:
+      - exchange-net
+
+  generator:
+    image: generator-service:1.0
+    container_name: generator
+    hostname: generator
+    depends_on:
+      - kafka
+      - generatordb
+      - blobstorage
+    networks:
+      - exchange-net
+
+  senderdb:
+    image: postgres:16-alpine
+    container_name: senderdb
+    hostname: senderdb
+    environment:
+      POSTGRES_USER: sender
+      POSTGRES_PASSWORD: sender
+      POSTGRES_DB: sender_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data/senderdb:/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U sender -d sender_db" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    networks:
+      - exchange-net
+
+  sender:
+    image: sender-service:1.0
+    container_name: sender
+    hostname: sender
+    depends_on:
+      - kafka
+      - redis
+      - senderdb
+      - blobstorage
+      - extservice1
+      - extservice2
+    networks:
+      - exchange-net
+
+  extservice1:
+    container_name: extservice1
+    hostname: extservice1
+    image: boxboat/hello-world-webapp
+    environment:
+      - PORT=8081
+    networks:
+      - exchange-net
+
+  extservice2:
+    container_name: extservice2
+    hostname: extservice2
+    image: boxboat/hello-world-webapp
+    environment:
+      - PORT=8081
+    networks:
+      - exchange-net
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - sender
+    networks:
+      - exchange-net
+    restart: always
+
+  grafana:
+    container_name: grafana
+    hostname: grafana
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - exchange-net
+    restart: always
+
+
+  # вспомогательный сервис для доступа к контейнерам по иманам контейнеров
+  hoster:
+    image: dvdarias/docker-hoster
+    container_name: hoster
+    networks:
+      - exchange-net
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+      - /etc/hosts:/tmp/hosts
+
+
+networks:
+  exchange-net:
+    driver: bridge
+

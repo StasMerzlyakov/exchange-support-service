@@ -1,0 +1,63 @@
+server:
+  port: 8081
+
+serviceId: sender
+
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+    consumer:
+      group-id: ${serviceId}
+      key-deserializer: org.apache.kafka.common.serialization.UUIDDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "ru.otus.exchange.common"
+  data:
+    redis:
+      host: redis
+      port: 6379
+  datasource:
+    url: jdbc:postgresql://senderdb:5432/sender_db
+    username: sender
+    password: sender
+    driver-class-name: org.postgresql.Driver
+
+sender:
+  from-topic: to_send_topic
+  blob-storage-host: blobstorage
+  blob-storage-port: 9090
+  send-limit: 10
+  lock-prefix: department-
+  lock-duration: 10s
+  cache-refresh-timeout: 10s
+  max-conn-per-route: 2000
+  max-conn-total: 2000
+  connection-timeout-mls: 5000
+  keep-alive-mls: 5000
+
+management:
+  server:
+    port: 7000
+  endpoint:
+    prometheus:
+      #  full access by default; (see hasRole('ROLE_ADMIN'), authenticated)
+      access: unrestricted
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+      sla:
+        http:
+          server:
+            requests: 100ms, 150ms, 250ms, 500ms, 1s
+

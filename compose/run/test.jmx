@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="gateway">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="-1440012446">messageid</stringProp>
+            <stringProp name="3530753">size</stringProp>
+            <stringProp name="3076010">data</stringProp>
+            <stringProp name="772772249">dataBase64</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="948161629">
+              <stringProp name="803264237">${__RandomString(25, 0123456789)}</stringProp>
+              <stringProp name="1563151643">500000</stringProp>
+              <stringProp name="-1158167518">${__RandomString(${size}, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="1396030628">${__base64Encode(${data})}</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="receive" enabled="true">
+          <stringProp name="HTTPSampler.path">http://gateway:8080/receive</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&lt;env:Envelope xmlns:env=&quot;http://exchange.support/envelope&quot; xmlns:add=&quot;http://exchange.support/header/addressing&quot; xmlns:faul=&quot;http://exchange.support/utility/fault&quot; xmlns:not=&quot;http://exchange.support/utility/notification&quot; xmlns:exc=&quot;http://exchange.support/messages/exchange&quot;&gt;&#xd;
+  &lt;env:Header&gt;&#xd;
+    &lt;add:Addressing&gt;&#xd;
+      &lt;add:MessageID&gt;${messageid}&lt;/add:MessageID&gt;&#xd;
+      &lt;add:From&gt;123456789&lt;/add:From&gt;&#xd;
+      &lt;add:To&gt;333444555&lt;/add:To&gt;&#xd;
+    &lt;/add:Addressing&gt;&#xd;
+  &lt;/env:Header&gt;&#xd;
+  &lt;env:Body&gt;&#xd;
+    &lt;exc:ExchangeMessage&gt;&#xd;
+      &lt;exc:PersonDataType&gt;&#xd;
+        &lt;exc:FirstName&gt;Иванов&lt;/exc:FirstName&gt;&#xd;
+        &lt;exc:LastName&gt;Иван&lt;/exc:LastName&gt;&#xd;
+        &lt;exc:Patronymic&gt;Иванович&lt;/exc:Patronymic&gt;&#xd;
+        &lt;exc:BirthDate&gt;&#xd;
+          &lt;exc:year&gt;2000&lt;/exc:year&gt;&#xd;
+          &lt;exc:month&gt;--01&lt;/exc:month&gt;&#xd;
+          &lt;exc:day&gt;---15&lt;/exc:day&gt;&#xd;
+        &lt;/exc:BirthDate&gt;&#xd;
+        &lt;exc:Gender&gt;М&lt;/exc:Gender&gt;&#xd;
+      &lt;/exc:PersonDataType&gt;&#xd;
+      &lt;exc:Photo&gt;${dataBase64}&lt;/exc:Photo&gt;&#xd;
+    &lt;/exc:ExchangeMessage&gt;&#xd;
+  &lt;/env:Body&gt;&#xd;
+&lt;/env:Envelope&gt;</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="ContentType" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/octet-stream</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <intProp name="calcMode">0</intProp>
+          <doubleProp>
+            <name>throughput</name>
+            <value>60.0</value>
+            <savedValue>0.0</savedValue>
+          </doubleProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

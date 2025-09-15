@@ -1,0 +1,60 @@
+services:
+  app:
+    image: gateway-service:1.0
+    container_name: gateway
+    hostname: gateway
+    ports:
+      - "8080:8080"
+      - "7000:7000"
+      - "12345:12345"
+    networks:
+      - gateway-net
+    depends_on:
+      - redis
+      - receiver
+      - zipkin
+
+  redis:
+    image: redis:8.0.3
+    container_name: redis
+    hostname: redis
+    networks:
+      - gateway-net
+
+  rclient:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    hostname: rclient
+    ports:
+      - "5540:5540"
+    depends_on:
+      - redis
+    networks:
+      - gateway-net
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    hostname: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - gateway-net
+
+
+  receiver:
+    image: boxboat/hello-world-webapp
+    container_name: receiver
+    hostname: receiver
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+    networks:
+      - gateway-net
+
+
+networks:
+  gateway-net:
+    driver: bridge
+

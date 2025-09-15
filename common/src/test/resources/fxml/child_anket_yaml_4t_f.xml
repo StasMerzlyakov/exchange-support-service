@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:Envelope xmlns:ns2="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://xsd.gspvd/v001/mrcod" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" xmlns:ns10="http://xsd.gspvd/v001/forms/internal/person-address" xmlns:ns11="http://xsd.gspvd/v001/forms/internal/control-info" xmlns:ns12="http://xsd.gspvd/v001/forms/passport/child" xmlns:ns13="http://www.w3.org/2001/04/xmlenc#" xmlns:ns14="http://www.w3.org/2000/09/xmldsig#" xmlns:ns15="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns16="http://xsd.gspvd/v001/forms/passport/pgs-child" xmlns:ns17="http://xsd.gspvd/v001/forms/internal/person-relatives" xmlns:ns18="http://xsd.gspvd/v001/forms/passport/mature" xmlns:ns19="http://xsd.gspvd/v001/forms/internal/employment-history" xmlns:ns20="http://xsd.gspvd/v001/forms/passport/pgs-mature" xmlns:ns21="http://xsd.gspvd/v001/GISMU/common-data" xmlns:ns22="http://xsd.gspvd/v001/forms/travel-document-child" xmlns:ns23="http://xsd.gspvd/v001/forms/passport/service-diplomatic" xmlns:ns24="http://xsd.gspvd/v001/approvals/requisition" xmlns:ns25="http://xsd.gspvd/v001/forms/travel-document" xmlns:ns26="http://xsd.gspvd/v001/forms/residence-permit" xmlns:ns27="http://xsd.gspvd/v001/lifecycle-state" xmlns:ns28="http://xsd.gspvd/v001/personalization/allowed" xmlns:ns29="http://xsd.gspvd/v001/addressing" xmlns:ns3="urn://visa.xs.gosniias/1.0.1" xmlns:ns30="http://xsd.gspvd/v001/personalization/request/common" xmlns:ns31="http://xsd.gspvd/v001/GISMU/refugee-travel/dossier" xmlns:ns32="http://xsd.gspvd/v001/GISMU/refugee-travel/upload" xmlns:ns33="http://xsd.gspvd/v001/GISMU/residence-permit/dossier" xmlns:ns34="http://xsd.gspvd/v001/GISMU/residence-permit/upload" xmlns:ns35="http://xsd.gspvd/v001/certificate-order/cert-order-lifecycle-state" xmlns:ns36="http://xsd.gspvd/v001/forms/travel-document-adult-metrics" xmlns:ns37="http://xsd.gspvd/v001/frontier-segment/issued-document-data/response" xmlns:ns38="urn:gspvdnp:clientview" xmlns:ns39="http://xsd.gspvd/v001/frontier-segment/federal-inquiry/common" xmlns:ns4="http://xsd.gspvd/v001/vs" xmlns:ns40="http://xsd.gspvd/v001/frontier-segment/federal-inquiry/request" xmlns:ns41="http://xsd.gspvd/v001/forms/travel-document-child-metrics" xmlns:ns42="http://xsd.gspvd/v001/approvals/common" xmlns:ns43="http://xsd.gspvd/v001/approvals/request" xmlns:ns44="http://xsd.gspvd/v001/approvals/form" xmlns:ns45="http://xsd.gspvd/v001/approvals/cdb-request" xmlns:ns46="http://xsd.gspvd/v001/personalization/response" xmlns:ns47="http://www.w3.org/2010/xml-c14n2" xmlns:ns48="http://xsd.gspvd/v001/approvals/state" xmlns:ns49="http://xsd.gspvd/v001/utility/notification" xmlns:ns5="http://xsd.gspvd/v001/gisgmp/payment" xmlns:ns50="http://xsd.gspvd/v001/certificate-order/cert-order-form" xmlns:ns51="http://xsd.gspvd/v001/utility/cert-request-common" xmlns:ns52="http://xsd.gspvd/v001/certificate-order" xmlns:ns53="http://xsd.gspvd/v001/certificate-order/cert-order-cms" xmlns:ns54="http://xsd.gspvd/v001/forms/form" xmlns:ns55="http://xsd.gspvd/v001/forms/travel-document-adult" xmlns:ns56="http://xsd.gspvd/v001/forms/travel-document-adult-biometrics" xmlns:ns57="http://xsd.gspvd/v001/forms/travel-document-child-yml" xmlns:ns58="http://xsd.gspvd/v001/pkrbp/pkrbp" xmlns:ns59="http://xsd.gspvd/v001/cdb/cdb-mrz-annul-request" xmlns:ns6="http://xsd.gspvd/v001/forms/common" xmlns:ns60="http://xsd.gspvd/v001/cdb/cdb-issuance-request" xmlns:ns61="http://xsd.gspvd/v001/cdb/cdb-annul-request" xmlns:ns62="http://xsd.gspvd/v001/cdb/cdb-search-request" xmlns:ns63="http://xsd.gspvd/v001/cdb/cdb-issuance-response" xmlns:ns64="http://xsd.gspvd/v001/frontier-segment/border-intersection/request" xmlns:ns65="http://xsd.gspvd/v001/frontier-segment" xmlns:ns66="http://xsd.gspvd/v001/frontier-segment/border-intersection/response" xmlns:ns67="http://xsd.gspvd/v001/GISMU/frontier-intersection" xmlns:ns68="http://xsd.gspvd/v001/frontier-segment/federal-inquiry/response" xmlns:ns69="http://xsd.gspvd/v001/frontier-segment/issued-document-data/request" xmlns:ns7="http://xsd.gspvd/v001/pgs/types" xmlns:ns70="http://xsd.gspvd/v001/frontier-segment/invalid-document-data/request" xmlns:ns71="http://xsd.gspvd/v001/frontier-segment/fssp-data" xmlns:ns72="http://xsd.gspvd/v001/okz-request" xmlns:ns73="http://xsd.gspvd/v001/okz-request-ext" xmlns:ns74="http://xsd.gspvd/v001/cdb/cdb-type" xmlns:ns75="http://xsd.gspvd/v001/cdb/cdb-search-response" xmlns:ns76="http://xsd.gspvd/v001/approvals/cdb-response" xmlns:ns77="http://xsd.gspvd/v001/cdb/cdb-annul-response" xmlns:ns78="http://xsd.gspvd/v001/ks" xmlns:ns79="http://xsd.gspvd/v001/approvals/response" xmlns:ns8="http://xsd.gspvd/v001/common-data" xmlns:ns80="http://xsd.gspvd/v001/armus/armus-operations" xmlns:ns81="http://xsd.gspvd/v001/armus/armus-type" xmlns:ns82="http://xsd.gspvd/v001/armus/armus-common" xmlns:ns83="http://www.w3.org/2010/xmldsig2#" xmlns:ns84="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:ns85="http://ru/pvdnp/smev3/cm" xmlns:ns86="http://xsd.gspvd/v001/utility/faults" xmlns:ns87="http://xsd.gspvd/v001/personalization/request/passport" xmlns:ns88="http://xsd.gspvd/v001/personalization/request" xmlns:ns89="http://xsd.gspvd/v001/personalization/request/residence-permit" xmlns:ns9="http://xsd.gspvd/v001/forms/internal/person-data-change" xmlns:ns90="http://xsd.gspvd/v001/personalization/request/travel-document" xmlns:ns91="http://xsd.gspvd/v001/personalization/pc/print-tasks" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#">
+  <ns2:Header>
+    <ns29:Addressing xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="AddressingHeader">
+      <ns29:LifecycleInfo>
+        <ns29:LifecycleID>1000230012018100900000008</ns29:LifecycleID>
+      </ns29:LifecycleInfo>
+      <ns29:To>100000003</ns29:To>
+      <ns29:To>100023001</ns29:To>
+      <ns29:From>
+        <ns29:Address>100023001</ns29:Address>
+      </ns29:From>
+      <ns29:MessageID>1000230012018100900000110</ns29:MessageID>
+    </ns29:Addressing>
+    <wsse:Security>
+      <wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="TIMESTAMP">
+        <wsu:Created wsu:Id="CREATED">2018-10-09T15:04:54.460Z</wsu:Created>
+      </wsu:Timestamp>
+      <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="Signature">
+        <ds:SignedInfo xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="SignedInfo">
+          <ds:CanonicalizationMethod xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+            <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+            <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+            <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+            <c14n2:QNameAware/>
+          </ds:CanonicalizationMethod>
+          <ds:SignatureMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102001-gostr3411"/>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="AddressingHeaderReference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#AddressingHeader"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>txOx4+GN+EqoIxACb1dAXiv2D5r6k7SqQqWW01gtD70=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="MessageBodyReference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#MessageBody"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>jv20e2Rt9MTZEyMPm+pjkpIJQ21gRpklEwXm36ZUpvg=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="TIMESTAMPReference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#TIMESTAMP"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>GLlZMqsthw6qzJXZF1O26a4ANNtj+djfK3d4xMWL6nM=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="x509CertReference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#x509Cert"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>kM5EQCva9q9XVAk0q5jY1SkQ4gu13X4RywP+oYdJIww=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="EncryptedKeyDG3Reference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#EncryptedKeyDG3"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>BeEs3teQLqeq/Adiol/royM5qmaZckLRMfoiv9S/lG8=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="EncryptedKeyPapillaryPatternInfoType17_413Reference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#EncryptedKeyPapillaryPatternInfoType17_413"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>tYA99y0webcJ/djQ2jGG0syHMYWDDlqBfWBLEQL/2cs=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="EncryptedKeyPapillaryPatternInfoType21_416Reference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#EncryptedKeyPapillaryPatternInfoType21_416"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>yNbA2/FGbEG7I96btuCp/EXH57WsH1zp95cMsTyeGSM=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="EncryptedKeyPapillaryPatternInfoType21_415Reference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#EncryptedKeyPapillaryPatternInfoType21_415"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>1HNyfNi5zdCOE81oxixjZ0DbKy8eRVOf91OTh++ACdc=</ds:DigestValue>
+          </ds:Reference>
+          <ds:Reference xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="EncryptedKeyPapillaryPatternInfoType17_414Reference">
+            <ds:Transforms>
+              <ds:Transform xmlns:dsig2="http://www.w3.org/2010/xmldsig2#" ds:Algorithm="http://www.w3.org/2010/xmldsig2#transform">
+                <dsig2:Selection dsig2:Algorithm="http://www.w3.org/2010/xmldsig2#xml" dsig2:URI="#EncryptedKeyPapillaryPatternInfoType17_414"/>
+                <dsig2:Canonicalization xmlns:c14n2="http://www.w3.org/2010/xml-c14n2" dsig2:Algorithm="http://www.w3.org/2010/xml-c14n2">
+                  <c14n2:IgnoreComments>true</c14n2:IgnoreComments>
+                  <c14n2:TrimTextNodes>true</c14n2:TrimTextNodes>
+                  <c14n2:PrefixRewrite>sequential</c14n2:PrefixRewrite>
+                  <c14n2:QNameAware/>
+                </dsig2:Canonicalization>
+                <dsig2:Verifications>
+                  <dsig2:Verification dsig2:DigestDataLength="32"/>
+                </dsig2:Verifications>
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod ds:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+            <ds:DigestValue>7BPv8PMjdnfXek+jZjGcJKXjXmpuaaU6kzXuMB36atk=</ds:DigestValue>
+          </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>qM+y2TtHorx8hAJmw6UR4rnbv0rHReM04X6SaxPKlallIsXpTW+A3dFUSgYdkk+dmCFwEBeCnnP2SRoQy1y+eg==</ds:SignatureValue>
+        <ds:KeyInfo xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="x509Cert">
+          <ds:X509Data>
+            <ds:X509Certificate>QkxPQlo6OUNFMUEzM0NGMjc1Qzg1NUI3RDExQTkzRDI0MTY0M0Y2MDkzMUZGNDg1QjE3QUYyOEZGRTAzNzAwMUUyOEJBNy1CQzVDRUE1MDVDNEUyMTZBMUJERDc2MDg2QjgyMjdDOA==</ds:X509Certificate>
+          </ds:X509Data>
+        </ds:KeyInfo>
+      </ds:Signature>
+      <xenc:EncryptedKey wsu:Id="EncryptedKeyDG3">
+        <xenc:EncryptionMethod xenc:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+        <xenc:KeyInfo wsu:Id="EncryptedKeyCertDG3">
+          <ds:X509Data>
+            <ds:X509Certificate>QkxPQlo6MzExNTZDMDcwMkM1MDc1QjJEOTBCOEQ1OTA0ODRGMjAwOUUzRTgzMERBN0JGMDcwODU2QjI3MTJBOEI1NjQ1NS1CNDNFQjlEQzBBQjAxMUQzOURDMEJEMENENUM1OUY4Rg==</ds:X509Certificate>
+          </ds:X509Data>
+        </xenc:KeyInfo>
+        <xenc:CipherData>
+          <xenc:CipherValue>QkxPQlo6NDAwRThDMTE2RUZGM0I5RUVGMzI4NUE5RUVFMUY3MEM0RDExNjg5QjhGMzcwMDdFOTUwMDE5RDVDNzRCQTU1NC1GRUFERkM5ODM2RjI3QTI0QjlFQkJCMUJDRUU5RUQ4Mg==</xenc:CipherValue>
+        </xenc:CipherData>
+        <xenc:ReferenceList>
+          <xenc:DataReference xenc:URI="DG3"/>
+        </xenc:ReferenceList>
+      </xenc:EncryptedKey>
+      <xenc:EncryptedKey wsu:Id="EncryptedKeyPapillaryPatternInfoType17_413">
+        <xenc:EncryptionMethod xenc:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+        <xenc:KeyInfo wsu:Id="EncryptedKeyCertPapillaryPatternInfoType17_413">
+          <ds:X509Data>
+            <ds:X509Certificate>QkxPQlo6MzExNTZDMDcwMkM1MDc1QjJEOTBCOEQ1OTA0ODRGMjAwOUUzRTgzMERBN0JGMDcwODU2QjI3MTJBOEI1NjQ1NS1CNDNFQjlEQzBBQjAxMUQzOURDMEJEMENENUM1OUY4Rg==</ds:X509Certificate>
+          </ds:X509Data>
+        </xenc:KeyInfo>
+        <xenc:CipherData>
+          <xenc:CipherValue>QkxPQlo6QzEyOTk1MjUyMDdGQkRGNUUzQjJFRDM4RThDMDYwNjVGNEVFNEQ2NUY2RUU3QkIwNjYxRUE4NzI1MUE1NkI3OS05RjA3REMzMTg1NTA1RjQ4MUFCN0ZCRDBGMzYyRDlFQQ==</xenc:CipherValue>
+        </xenc:CipherData>
+        <xenc:ReferenceList>
+          <xenc:DataReference xenc:URI="PapillaryPatternInfoType17_413"/>
+        </xenc:ReferenceList>
+      </xenc:EncryptedKey>
+      <xenc:EncryptedKey wsu:Id="EncryptedKeyPapillaryPatternInfoType21_416">
+        <xenc:EncryptionMethod xenc:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+        <xenc:KeyInfo wsu:Id="EncryptedKeyCertPapillaryPatternInfoType21_416">
+          <ds:X509Data>
+            <ds:X509Certificate>QkxPQlo6MzExNTZDMDcwMkM1MDc1QjJEOTBCOEQ1OTA0ODRGMjAwOUUzRTgzMERBN0JGMDcwODU2QjI3MTJBOEI1NjQ1NS1CNDNFQjlEQzBBQjAxMUQzOURDMEJEMENENUM1OUY4Rg==</ds:X509Certificate>
+          </ds:X509Data>
+        </xenc:KeyInfo>
+        <xenc:CipherData>
+          <xenc:CipherValue>QkxPQlo6MUJBQjg1REI3NjA5OUNGODBCQkEzM0NDOUMxRTkzNzFCN0ZBRUI5Njk5Q0E4Q0IxNzAwQTM3NTIzOUY5NzA3Qi1GODA2REIxRjdCMzg4MEM3RDRFMzc1Qzg1MTFBQkUyMw==</xenc:CipherValue>
+        </xenc:CipherData>
+        <xenc:ReferenceList>
+          <xenc:DataReference xenc:URI="PapillaryPatternInfoType21_416"/>
+        </xenc:ReferenceList>
+      </xenc:EncryptedKey>
+      <xenc:EncryptedKey wsu:Id="EncryptedKeyPapillaryPatternInfoType21_415">
+        <xenc:EncryptionMethod xenc:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+        <xenc:KeyInfo wsu:Id="EncryptedKeyCertPapillaryPatternInfoType21_415">
+          <ds:X509Data>
+            <ds:X509Certificate>QkxPQlo6MzExNTZDMDcwMkM1MDc1QjJEOTBCOEQ1OTA0ODRGMjAwOUUzRTgzMERBN0JGMDcwODU2QjI3MTJBOEI1NjQ1NS1CNDNFQjlEQzBBQjAxMUQzOURDMEJEMENENUM1OUY4Rg==</ds:X509Certificate>
+          </ds:X509Data>
+        </xenc:KeyInfo>
+        <xenc:CipherData>
+          <xenc:CipherValue>QkxPQlo6OENDMzE2NDNGNzI4MjU4RkZENUVBN0ZDMkI2QUE4RDIyN0E4NjQ2QzFBRDk0MEMzMzdFRUM0RUM0Qjk3MzI2Mi1GRkNEMzhCRjNBNjgxMUZEQ0ZBMzgzNTc0MUFGOTc0QQ==</xenc:CipherValue>
+        </xenc:CipherData>
+        <xenc:ReferenceList>
+          <xenc:DataReference xenc:URI="PapillaryPatternInfoType21_415"/>
+        </xenc:ReferenceList>
+      </xenc:EncryptedKey>
+      <xenc:EncryptedKey wsu:Id="EncryptedKeyPapillaryPatternInfoType17_414">
+        <xenc:EncryptionMethod xenc:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+        <xenc:KeyInfo wsu:Id="EncryptedKeyCertPapillaryPatternInfoType17_414">
+          <ds:X509Data>
+            <ds:X509Certificate>QkxPQlo6MzExNTZDMDcwMkM1MDc1QjJEOTBCOEQ1OTA0ODRGMjAwOUUzRTgzMERBN0JGMDcwODU2QjI3MTJBOEI1NjQ1NS1CNDNFQjlEQzBBQjAxMUQzOURDMEJEMENENUM1OUY4Rg==</ds:X509Certificate>
+          </ds:X509Data>
+        </xenc:KeyInfo>
+        <xenc:CipherData>
+          <xenc:CipherValue>QkxPQlo6QUVGNzIyMTYwOTYyRDU4OUY3ODdEQUY5NDhEMjkyOTcwRTlCMjNGQTY5QkQzODk2RUUyMDEzM0E4RDJFRDQ4Ny1GQjJFODkzMkY2MkVBRTk3M0QxQzU0M0VGQzU0M0IxMw==</xenc:CipherValue>
+        </xenc:CipherData>
+        <xenc:ReferenceList>
+          <xenc:DataReference xenc:URI="PapillaryPatternInfoType17_414"/>
+        </xenc:ReferenceList>
+      </xenc:EncryptedKey>
+    </wsse:Security>
+  </ns2:Header>
+  <ns2:Body xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="MessageBody">
+    <ns2:Form>
+      <ns54:TravelDocumentChildYaml>
+        <ns57:LifecycleData ns8:fromPGS="false">
+          <ns8:LifecycleID>1000230012018100900000008</ns8:LifecycleID>
+          <ns8:InitiatorDepartment>100023001</ns8:InitiatorDepartment>
+          <ns8:DocumentType>PT</ns8:DocumentType>
+          <ns8:State>Сформирована</ns8:State>
+        </ns57:LifecycleData>
+        <ns57:ServiceInfo>
+          <ns6:AuthorityName>МВД 23001</ns6:AuthorityName>
+          <ns6:FormDate>2018-05-29T00:00:00.000Z</ns6:FormDate>
+          <ns6:RegistrationNumber>1000230012018052900000003</ns6:RegistrationNumber>
+        </ns57:ServiceInfo>
+        <ns41:TravelDocumentChildMetrics>
+          <ns41:lastName>Пробаа</ns41:lastName>
+          <ns41:latinLastName>PROBAA</ns41:latinLastName>
+          <ns41:firstName>Детская</ns41:firstName>
+          <ns41:latinFirstName>DETSKAIA</ns41:latinFirstName>
+          <ns41:patronymic>Пдб</ns41:patronymic>
+          <ns41:sex>М</ns41:sex>
+          <ns41:birthDate>
+            <ns41:day>11</ns41:day>
+            <ns41:month>11</ns41:month>
+            <ns41:year>1977</ns41:year>
+          </ns41:birthDate>
+          <ns41:birthPlace>
+            <ns41:country>РОССИЯ</ns41:country>
+            <ns41:latinCountry>rus</ns41:latinCountry>
+            <ns41:region>АЛТАЙСКИЙ КРАЙ</ns41:region>
+          </ns41:birthPlace>
+          <ns41:namesHistory>searchPath2
+            <ns41:lastName>аку</ns41:lastName>
+            <ns41:firstName>пуупу</ns41:firstName>
+            <ns41:patronymic>уцйуцуа</ns41:patronymic>
+            <ns41:changeDate>2000-01-01</ns41:changeDate>
+            <ns41:changePlace>уаупкуук</ns41:changePlace>
+          </ns41:namesHistory>
+          <ns41:namesHistory>
+            <ns41:lastName>а</ns41:lastName>
+            <ns41:firstName>веиат</ns41:firstName>
+            <ns41:patronymic>пьап</ns41:patronymic>
+            <ns41:changeDate>2000-01-01</ns41:changeDate>
+            <ns41:changePlace>ервкервке</ns41:changePlace>
+          </ns41:namesHistory>
+          <ns41:namesHistory>
+            <ns41:lastName>ффф</ns41:lastName>
+            <ns41:firstName>ффф</ns41:firstName>
+            <ns41:patronymic>ффф</ns41:patronymic>
+            <ns41:changeDate>2015-11-22</ns41:changeDate>
+            <ns41:changePlace>фффф</ns41:changePlace>
+          </ns41:namesHistory>
+          <ns41:namesHistory>
+            <ns41:lastName>рр</ns41:lastName>
+            <ns41:firstName>ррр</ns41:firstName>
+            <ns41:patronymic>ррр</ns41:patronymic>
+            <ns41:changeDate>2000-01-01</ns41:changeDate>
+            <ns41:changePlace>рррр</ns41:changePlace>
+          </ns41:namesHistory>
+          <ns41:residence>
+            <ns41:postcode>123</ns41:postcode>
+            <ns41:region>ИВАНОВСКАЯ ОБЛ.</ns41:region>
+            <ns41:locality>Мммммм</ns41:locality>
+            <ns41:house>11</ns41:house>
+            <ns41:registrationTerm>
+              <ns41:startDate>2000-01-01</ns41:startDate>
+              <ns41:endDate>2000-01-03</ns41:endDate>
+            </ns41:registrationTerm>
+          </ns41:residence>
+          <ns41:nationality>АБХАЗИЯ</ns41:nationality>
+          <ns41:nationalityCode>ABH</ns41:nationalityCode>
+          <ns41:additionalNationality>АВСТРАЛИЯ</ns41:additionalNationality>
+          <ns41:receiptType>Первичное</ns41:receiptType>
+          <ns41:receiptPurpose>Для проживания за границей</ns41:receiptPurpose>
+          <ns41:liveCountry>ВЕНЕСУЭЛА</ns41:liveCountry>
+          <ns41:hasConvictionRecord>false</ns41:hasConvictionRecord>
+          <ns41:hasOutstandingObligation>false</ns41:hasOutstandingObligation>
+          <ns41:hasTaxDebts>false</ns41:hasTaxDebts>
+          <ns41:travelDoc>
+            <ns41:series>33</ns41:series>
+            <ns41:number>4444444</ns41:number>
+            <ns41:issueDate>2011-11-11</ns41:issueDate>
+            <ns41:issuer>кккккк</ns41:issuer>
+          </ns41:travelDoc>
+          <ns41:formReceiptionDate>2018-05-29</ns41:formReceiptionDate>
+          <ns41:registrationNumber>1000230012018052900000003</ns41:registrationNumber>
+          <ns41:representative>
+            <ns41:lastName>пр</ns41:lastName>
+            <ns41:firstName>тап</ns41:firstName>
+            <ns41:patronymic>па</ns41:patronymic>
+            <ns41:sex>Ж</ns41:sex>
+            <ns41:birthDate>
+              <ns41:day>1</ns41:day>
+              <ns41:month>1</ns41:month>
+              <ns41:year>1990</ns41:year>
+            </ns41:birthDate>
+            <ns41:birthPlace>
+              <ns41:country>АФГАНИСТАН</ns41:country>
+              <ns41:latinCountry>afg</ns41:latinCountry>
+              <ns41:region>АФГАНИСТАН</ns41:region>
+              <ns41:birthPlace>апее</ns41:birthPlace>
+            </ns41:birthPlace>
+            <ns41:residence>
+              <ns41:postcode>123124</ns41:postcode>
+              <ns41:phone>1242353425</ns41:phone>
+              <ns41:region>АЛТАЙСКИЙ КРАЙ</ns41:region>
+              <ns41:province>вреврве</ns41:province>
+              <ns41:locality>аереарыерты</ns41:locality>
+              <ns41:street>ервара</ns41:street>
+              <ns41:house>1</ns41:house>
+              <ns41:housing>2</ns41:housing>
+              <ns41:building>3</ns41:building>
+              <ns41:flat>4</ns41:flat>
+              <ns41:registrationTerm>
+                <ns41:startDate>1997-01-01</ns41:startDate>
+                <ns41:endDate>2000-01-05</ns41:endDate>
+              </ns41:registrationTerm>
+            </ns41:residence>
+            <ns41:refugeeDocument>
+              <ns41:series>224</ns41:series>
+              <ns41:number>423423</ns41:number>
+              <ns41:issueDate>1999-12-29</ns41:issueDate>
+              <ns41:issuer>2342иыреыкр234</ns41:issuer>
+            </ns41:refugeeDocument>
+          </ns41:representative>
+        </ns41:TravelDocumentChildMetrics>
+        <ns56:TravelDocumentAdultBiometrics>
+          <ns56:Portrait>QkxPQlo6MDAyMUZENEYxMTNERDlDQUY3NUFGOUM4MDVERjZEOTZFRDUyRjE3MjBGNjg2NkY5MURCMEZFNzY2Q0FDOTg4RC03NDg1NzQ1Qjg5RjgzNDMyQTY2QUU5NTEwNjgxRDEzQw==</ns56:Portrait>
+          <ns56:ColorPhoto>QkxPQlo6MDQxRTg3NjQ2QTNGNThGRDFGNkM2NkRENTM1RjY4NjBERUE1MTkwN0U3QkY1Q0YzMkE0N0MyQTc2RDRGMkQ5RC1FMDA2QTg4RTQxNjIwMzlGMjUzMjc3MENENUNFMTI2Qw==</ns56:ColorPhoto>
+          <ns56:Signature>QkxPQlo6QTBERjNGNDEwOTkwN0ZGQTY1NjRGOTZDRDZDMjUyODI4REZBRDZGNDFEMDg2M0MyM0RBRTZEODczNDM4NDQ4Mi0zNEI5RjJFRDIxOTE0NUYwOTM1QjE3RTEyRDY4ODI5MQ==</ns56:Signature>
+          <ns56:DG3>
+            <ns8:EncryptedDG3 ns15:Id="DG3" ns8:Type="http://www.w3.org/2001/04/xmlenc#Content">
+              <ns13:EncryptionMethod ns13:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+              <ns13:CipherData>
+                <ns13:CipherValue>QkxPQlo6OTg4RUQxNTVGOTZCMjYyMkMwNkZDRTIyRjA5MTg5ODMxMkI5RDlFNjVCOUNENDg0Nzg5N0E5ODYwRTYzQUQ3NC1ENjlGRDY0MTA2NzVCMkNDNEJFRDZGODREM0EwQTNENQ==</ns13:CipherValue>
+              </ns13:CipherData>
+              <ns14:DigestMethod ns14:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+              <ns14:DigestValue>uiWdnC6WjlTZy6YJagQSxHO0/3BaoyxX9Ih+GDfzAC8=</ns14:DigestValue>
+            </ns8:EncryptedDG3>
+          </ns56:DG3>
+          <ns56:PapillaryPatterns>
+            <ns8:PapillaryPattern>
+              <ns8:PapillaryPatternInfo>оттиск правого указательного</ns8:PapillaryPatternInfo>
+              <ns8:EncryptedPapillaryPatternImage ns15:Id="PapillaryPatternInfoType17_413" ns8:Type="http://www.w3.org/2001/04/xmlenc#Content">
+                <ns13:EncryptionMethod ns13:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+                <ns13:CipherData>
+                  <ns13:CipherValue>QkxPQlo6NEZDMUQ5MTgxMDU4OTk3OTQyMTk2RTUxNTEwNDkyRUUzMkI3QkY0NzhEMDg5OUNFRDFBN0Q2MDQ1RjA1NDc1Ny0wMjBEMDkzOUYzREZEQTNCNDM0NDQxNTA2ODVCMDE2NQ==</ns13:CipherValue>
+                </ns13:CipherData>
+                <ns14:DigestMethod ns14:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+                <ns14:DigestValue>NQYRNW+h+GvZSr3aVopXPLNSUbp+BoNXGZMIqsbBBzw=</ns14:DigestValue>
+              </ns8:EncryptedPapillaryPatternImage>
+            </ns8:PapillaryPattern>
+            <ns8:PapillaryPattern>
+              <ns8:PapillaryPatternInfo>оттиск правого указательного</ns8:PapillaryPatternInfo>
+              <ns8:EncryptedPapillaryPatternImage ns15:Id="PapillaryPatternInfoType17_414" ns8:Type="http://www.w3.org/2001/04/xmlenc#Content">
+                <ns13:EncryptionMethod ns13:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+                <ns13:CipherData>
+                  <ns13:CipherValue>QkxPQlo6MDk2RkZFNjUwMzQ2Qjc5MURFRTlFNDhEOTc0MkU1OUM2MzYyRjZEOEI1RUUxMTEwRUMyQjY5OEEzMDg2QTFCMC05ODUzNEZDQUNCMDIxRkQ2RTgyQjlFNzM2OEVFQUJDQw==</ns13:CipherValue>
+                </ns13:CipherData>
+                <ns14:DigestMethod ns14:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+                <ns14:DigestValue>+ImIb4D+Xj63lhUjGFC9MYGEKy1mCPi6joumvVrrJWM=</ns14:DigestValue>
+              </ns8:EncryptedPapillaryPatternImage>
+            </ns8:PapillaryPattern>
+            <ns8:PapillaryPattern>
+              <ns8:PapillaryPatternInfo>оттиск левого указательного</ns8:PapillaryPatternInfo>
+              <ns8:EncryptedPapillaryPatternImage ns15:Id="PapillaryPatternInfoType21_415" ns8:Type="http://www.w3.org/2001/04/xmlenc#Content">
+                <ns13:EncryptionMethod ns13:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+                <ns13:CipherData>
+                  <ns13:CipherValue>QkxPQlo6NUZBN0E2REJDOTBFRTEzOTA2MUFDREFBNzg1OTg1RThFRUM1MTFCMUQzMTVEQjQ2MDI2RDc0RjZDQTdEQUEzQi0xNUEzNTU3RkFFNkVCRUFCMkJDODc2RTZCOEUyMkU2RQ==</ns13:CipherValue>
+                </ns13:CipherData>
+                <ns14:DigestMethod ns14:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+                <ns14:DigestValue>2p2Db+xtPNqzNp93uRarPwaME/HrCQmz6VMvJPARRlA=</ns14:DigestValue>
+              </ns8:EncryptedPapillaryPatternImage>
+            </ns8:PapillaryPattern>
+            <ns8:PapillaryPattern>
+              <ns8:PapillaryPatternInfo>оттиск левого указательного</ns8:PapillaryPatternInfo>
+              <ns8:EncryptedPapillaryPatternImage ns15:Id="PapillaryPatternInfoType21_416" ns8:Type="http://www.w3.org/2001/04/xmlenc#Content">
+                <ns13:EncryptionMethod ns13:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2001"/>
+                <ns13:CipherData>
+                  <ns13:CipherValue>QkxPQlo6QjUzQjE0MkUwMkRDRjhGRTcwQ0RFQkM1REU5MEQ0MDY3NENGNjkzMTVFNTc1NTg0NzcwMTg2RjUxNzVGOTAzMi1BNTBDNEUwRDU5ODFCREJEOTM3MkM0MjI0MjE2RTc1Mg==</ns13:CipherValue>
+                </ns13:CipherData>
+                <ns14:DigestMethod ns14:Algorithm="urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411"/>
+                <ns14:DigestValue>U3SI1tDTtIDgaOPgz3+1U6+mgoVMvsQkwF43POeoP8Y=</ns14:DigestValue>
+              </ns8:EncryptedPapillaryPatternImage>
+            </ns8:PapillaryPattern>
+          </ns56:PapillaryPatterns>
+        </ns56:TravelDocumentAdultBiometrics>
+      </ns54:TravelDocumentChildYaml>
+    </ns2:Form>
+  </ns2:Body>
+</ns2:Envelope>

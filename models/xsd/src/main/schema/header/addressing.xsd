@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<xsd:schema targetNamespace="http://exchange.support/header/addressing"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsa="http://exchange.support/header/addressing"
+            attributeFormDefault="qualified"
+            elementFormDefault="qualified">
+
+    <xsd:complexType name="AttributedURI">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:anyURI"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:element name="Addressing" type="wsa:AddressingHeaderType"/>
+
+    <xsd:complexType name="AddressingHeaderType">
+        <xsd:sequence>
+            <xsd:element name="MessageID" type="wsa:MessageIDType"/>
+            <xsd:element name="From" type="wsa:AttributedURI"/>
+            <xsd:element name="To" type="wsa:AttributedURI"/>
+            <xsd:element name="ReplyTo" type="wsa:MessageIDType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="MessageIDType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="ru">
+                Уникальный идентификатор сообщения.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="25"/>
+            <xsd:pattern value="\d{25}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

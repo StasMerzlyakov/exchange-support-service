@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+        <intProp name="ThreadGroup.num_threads">10</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+          <collectionProp name="UserParameters.names">
+            <stringProp name="3367">ip</stringProp>
+            <stringProp name="3446913">port</stringProp>
+            <stringProp name="1989774883">exchange</stringProp>
+            <stringProp name="3530753">size</stringProp>
+            <stringProp name="3076010">data</stringProp>
+            <stringProp name="-1331913276">digest</stringProp>
+            <stringProp name="772772249">dataBase64</stringProp>
+          </collectionProp>
+          <collectionProp name="UserParameters.thread_values">
+            <collectionProp name="1260899446">
+              <stringProp name="-1204607085">localhost</stringProp>
+              <stringProp name="1746030">9090</stringProp>
+              <stringProp name="187832203">${__UUID}</stringProp>
+              <stringProp name="1563151643">500000</stringProp>
+              <stringProp name="-1158167518">${__RandomString(${size}, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="-841680580">${__digest(sha256,${data},,,)}</stringProp>
+              <stringProp name="1396030628">${__base64Encode(${data})}</stringProp>
+            </collectionProp>
+          </collectionProp>
+          <boolProp name="UserParameters.per_iteration">true</boolProp>
+        </UserParameters>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="DelayTimer" enabled="true">
+          <stringProp name="ConstantTimer.delay">20</stringProp>
+          <stringProp name="RandomTimer.range">100.0</stringProp>
+        </UniformRandomTimer>
+        <hashTree/>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="GetMetadata XML" enabled="true">
+          <stringProp name="GRPCSampler.protoFolder">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/specs/proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">9090</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">ru.otus.exchange.blobstorage.api.grpc.v1.BlobStorageService/getMetadata</stringProp>
+          <stringProp name="GRPCSampler.deadline">1000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{
+	&quot;exchange&quot;: &quot;${exchange}&quot;,
+	&quot;key&quot;:&quot;xml&quot;
+}
+
+</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="check result" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
+     
+// Get the response body
+String responseBody = new String(prev.getResponseData());
+
+JSONObject jsonResponse = (JSONObject) JSONValue.parse(responseBody);
+
+def result = jsonResponse.get(&quot;size&quot;);
+
+if (result != 0) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&quot;expected object is not exists&quot;)
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="PutObject XML" enabled="true">
+          <stringProp name="GRPCSampler.protoFolder">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/specs/proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">9090</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">ru.otus.exchange.blobstorage.api.grpc.v1.BlobStorageService/putObject</stringProp>
+          <stringProp name="GRPCSampler.deadline">1000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{
+	&quot;storageKey&quot;:{
+		&quot;exchange&quot;:&quot;${exchange}&quot;,
+		&quot;key&quot;:&quot;xml&quot;
+	},
+	&quot;storageData&quot;:{
+		&quot;metadata&quot;:{
+			&quot;size&quot;:${size},
+			&quot;sha256Digest&quot;:&quot;${digest}&quot;
+		},
+		&quot;data&quot;:&quot;${dataBase64}&quot;
+	}
+}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="check result" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
+     
+// Get the response body
+String responseBody = new String(prev.getResponseData());
+
+JSONObject jsonResponse = (JSONObject) JSONValue.parse(responseBody);
+
+def result = jsonResponse.get(&quot;result&quot;);
+
+if (result != true) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&quot;object is not created&quot;)
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="DelayTimer" enabled="true">
+          <stringProp name="ConstantTimer.delay">20</stringProp>
+          <stringProp name="RandomTimer.range">100.0</stringProp>
+        </UniformRandomTimer>
+        <hashTree/>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="GetMetadata XML" enabled="true">
+          <stringProp name="GRPCSampler.protoFolder">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/specs/proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">9090</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">ru.otus.exchange.blobstorage.api.grpc.v1.BlobStorageService/getMetadata</stringProp>
+          <stringProp name="GRPCSampler.deadline">1000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{
+	&quot;exchange&quot;: &quot;${exchange}&quot;,
+	&quot;key&quot;:&quot;xml&quot;
+}
+
+</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="check result" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
+     
+// Get the response body
+String responseBody = new String(prev.getResponseData());
+
+JSONObject jsonResponse = (JSONObject) JSONValue.parse(responseBody);
+
+def size = jsonResponse.get(&quot;size&quot;);
+
+if (size != ${size}) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&quot;get metadata error&quot;)
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="DelayTimer" enabled="true">
+          <stringProp name="ConstantTimer.delay">20</stringProp>
+          <stringProp name="RandomTimer.range">100.0</stringProp>
+        </UniformRandomTimer>
+        <hashTree/>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="GetObject XML" enabled="true">
+          <stringProp name="GRPCSampler.protoFolder">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/specs/proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">9090</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">ru.otus.exchange.blobstorage.api.grpc.v1.BlobStorageService/getObject</stringProp>
+          <stringProp name="GRPCSampler.deadline">1000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{
+	&quot;exchange&quot;: &quot;${exchange}&quot;,
+	&quot;key&quot;:&quot;xml&quot;
+}
+</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="PutObject JSON" enabled="true">
+          <stringProp name="GRPCSampler.protoFolder">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/specs/proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">9090</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">ru.otus.exchange.blobstorage.api.grpc.v1.BlobStorageService/putObject</stringProp>
+          <stringProp name="GRPCSampler.deadline">1000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{
+	&quot;storageKey&quot;:{
+		&quot;exchange&quot;:&quot;${exchange}&quot;,
+		&quot;key&quot;:&quot;json&quot;
+	},
+	&quot;storageData&quot;:{
+		&quot;metadata&quot;:{
+			&quot;size&quot;:${size},
+			&quot;sha256Digest&quot;:&quot;${digest}&quot;
+		},
+		&quot;data&quot;:&quot;${dataBase64}&quot;
+	}
+}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="check result" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
+     
+// Get the response body
+String responseBody = new String(prev.getResponseData());
+
+JSONObject jsonResponse = (JSONObject) JSONValue.parse(responseBody);
+
+def result = jsonResponse.get(&quot;result&quot;);
+
+if (result != true) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&quot;object is not created&quot;)
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="GetObject JSON" enabled="true">
+          <stringProp name="GRPCSampler.protoFolder">/home/stas/Study/Otus/Java/Java-Advanced-DiplomProject/specs/proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">9090</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">ru.otus.exchange.blobstorage.api.grpc.v1.BlobStorageService/getObject</stringProp>
+          <stringProp name="GRPCSampler.deadline">1000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{
+	&quot;exchange&quot;: &quot;${exchange}&quot;,
+	&quot;key&quot;:&quot;json&quot;
+}
+</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree>
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="check result" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
+     
+// Get the response body
+String responseBody = new String(prev.getResponseData());
+
+JSONObject jsonResponse = (JSONObject) JSONValue.parse(responseBody);
+
+def metadata = jsonResponse.get(&quot;metadata&quot;);
+
+if (metadata == null) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&quot;get json erro&quot;)
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

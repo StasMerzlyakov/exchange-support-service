@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+serviceId: gateway
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: xmlRoute
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/receive
+          filters:
+            - name: CacheRequestBody
+              args:
+                bodyClass: byte[]
+            - name: ValidateInputXML
+              args:
+                acceptable: 123456789
+

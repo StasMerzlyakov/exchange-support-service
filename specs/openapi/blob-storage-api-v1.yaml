@@ -1,0 +1,275 @@
+openapi: 3.0.4
+info:
+  title: OpenAPI definition
+  version: v1.0
+servers:
+  - url: http://blob-storage/storage
+    description: sample server url
+paths:
+  /api/v1.0/{exchange}/{key}:
+    get:
+      tags:
+        - blob-storage
+      summary: read object
+      operationId: read
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: key
+          in: path
+          required: true
+          description: "any string"
+          schema:
+            type: string
+          example: 'test_blob'
+      responses:
+        '200':
+          description: object is exists
+          content:
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+        '204':
+          description: object is not exists
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ServerError'
+        '530':
+          description: memory cache error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '531':
+          description: redis cache error error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '532':
+          description: minio storage error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    post:
+      tags:
+        - blob-storage
+      summary: write object
+      operationId: write
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: key
+          in: path
+          required: true
+          description: "any string"
+          schema:
+            type: string
+          example: 'test_blob'
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: array
+              items:
+                type: string
+                format: byte
+        required: true
+      responses:
+        '200':
+          description: object already exists
+        '201':
+          description: object created
+        '403':
+          description: object's differ
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ServerError'
+        '530':
+          description: memory cache error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '531':
+          description: redis cache error error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '532':
+          description: minio storage error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    delete:
+      tags:
+        - blob-storage
+      summary: delete object
+      operationId: delete
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: key
+          in: path
+          required: true
+          description: "any string"
+          schema:
+            type: string
+          example: 'test_blob'
+      responses:
+        '200':
+          description: object deleted
+        '204':
+          description: object is not exists             
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ServerError'
+        '530':
+          description: memory cache error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '531':
+          description: redis cache error error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '532':
+          description: minio storage error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    head:
+      tags:
+        - blob-storage
+      summary: check is object exists
+      operationId: isExist
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema:
+            type: string
+            format: string
+        - name: key
+          in: path
+          required: true
+          description: "any string"
+          schema:
+            type: string
+          example: 'test_blob'
+      responses:
+        '200':
+          description: object is exists
+        '204':
+          description: object is not exists
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ServerError'
+        '530':
+          description: memory cache error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '531':
+          description: redis cache error error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '532':
+          description: minio storage error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/v1.0/{exchange}:
+    delete:
+      tags:
+        - blob-storage
+      summary: delete all objects object
+      operationId: deleteAll
+      parameters:
+        - name: exchange
+          in: path
+          required: true
+          schema:
+            type: string
+            format: string
+      responses:
+        '200':
+          description: exchange deleted
+        '204':
+          description: exchange is not exists             
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ServerError'
+        '530':
+          description: memory cache error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '531':
+          description: redis cache error error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+        '532':
+          description: minio storage error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+
+components:
+  schemas:
+      ServerError:
+        required:
+          - code
+          - message
+        type: object
+        properties:
+          code:
+            type: integer
+          message:
+            type: string
+  

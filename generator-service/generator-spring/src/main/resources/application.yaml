@@ -1,0 +1,51 @@
+server:
+  port: 8081
+
+serviceId: generator
+
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+    consumer:
+      group-id: ${serviceId}
+      key-deserializer: org.apache.kafka.common.serialization.UUIDDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "ru.otus.exchange.common"
+
+  datasource:
+    url: jdbc:postgresql://generatordb:5432/generator_db
+    username: generator
+    password: generator
+    driver-class-name: org.postgresql.Driver
+
+# blobStorage type grpc or dummy
+blobStorageType: grpc
+
+# kafkaSenderType type kafka or dummy
+kafkaSenderType: kafka
+
+# dbStorageType type jdbc or dummy
+dbStorageType: jdbc
+
+generator:
+  kafka-wait-timeout: 1s
+  from-topic: to_generator_topic
+  next-topic: to_send_topic
+  blob-storage-host: blobstorage
+  blob-storage-port: 9090
+management:
+  server:
+    port: 7000
+  endpoint:
+    prometheus:
+      #  fullacces by default; (see hasRole('ROLE_ADMIN'), authenticated)
+      access: unrestricted
+  endpoints:
+    web:
+      exposure:
+        include: prometheus

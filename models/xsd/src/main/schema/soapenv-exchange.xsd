@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:tns="http://exchange.support/envelope"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:wsa="http://exchange.support/header/addressing"
+           xmlns:flt="http://exchange.support/utility/fault"
+           xmlns:n="http://exchange.support/utility/notification"
+           xmlns:exch="http://exchange.support/messages/exchange"
+           targetNamespace="http://exchange.support/envelope"
+           elementFormDefault="qualified"
+           attributeFormDefault="qualified">
+
+    <xs:import namespace="http://exchange.support/header/addressing" schemaLocation="header/addressing.xsd"/>
+
+    <xs:import namespace="http://exchange.support/utility/fault" schemaLocation="utility/fault.xsd"/>
+    <xs:import namespace="http://exchange.support/utility/notification" schemaLocation="utility/notification.xsd"/>
+    <xs:import namespace="http://exchange.support/messages/exchange" schemaLocation="messages/exchange.xsd"/>
+
+    <xs:element name="Envelope" type="tns:EnvelopeType"/>
+    <xs:complexType name="EnvelopeType">
+        <xs:sequence>
+            <xs:element name="Header" type="tns:HeaderType" />
+            <xs:element name="Body" type="tns:BodyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="HeaderType">
+        <xs:sequence>
+            <xs:element ref="wsa:Addressing"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BodyType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Fault" type="flt:GenericFaultType"/>
+                <xs:element name="Notification" type="n:NotificationType"/>
+
+                <xs:element ref="exch:ExchangeMessage"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

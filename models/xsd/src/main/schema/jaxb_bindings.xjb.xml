@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings xmlns="https://jakarta.ee/xml/ns/jaxb"
+          xmlns:annox="http://annox.dev.java.net"
+          xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          extensionBindingPrefixes="xjc annox"
+          version="3.0">
+
+    <bindings schemaLocation="header/addressing.xsd">
+        <schemaBindings>
+            <package name="ru.otus.exchange.xsdschema.header"/>
+        </schemaBindings>
+    </bindings>
+
+    <bindings schemaLocation="soapenv-exchange.xsd">
+        <schemaBindings>
+            <package name="ru.otus.exchange.xsdschema"/>
+        </schemaBindings>
+        <bindings node="//xsd:complexType[@name='EnvelopeType']">
+            <annox:annotate>
+                <annox:annotate annox:class="jakarta.xml.bind.annotation.XmlRootElement" name="Envelope"
+                                namespace="http://exchange.support/envelope"/>
+            </annox:annotate>
+        </bindings>
+    </bindings>
+
+    <bindings schemaLocation="utility/notification.xsd">
+        <schemaBindings>
+            <package name="ru.otus.exchange.xsdschema.utility"/>
+        </schemaBindings>
+    </bindings>
+
+    <bindings schemaLocation="utility/fault.xsd">
+        <schemaBindings>
+            <package name="ru.otus.exchange.xsdschema.utility"/>
+        </schemaBindings>
+    </bindings>
+
+    <bindings schemaLocation="messages/exchange.xsd">
+        <schemaBindings>
+            <package name="ru.otus.exchange.xsdschema.messages"/>
+        </schemaBindings>
+        <bindings node="xsd:simpleType[@name='GenderType']">
+            <typesafeEnumClass>
+                <typesafeEnumMember name="MALE" value="М"/>
+                <typesafeEnumMember name="FEMALE" value="Ж"/>
+            </typesafeEnumClass>
+        </bindings>
+
+    </bindings>
+
+
+    <globalBindings>
+        <javaType name="java.util.Date" xmlType="xsd:date"
+                  parseMethod="ru.otus.exchange.xsdshema.adapter.DateAdapter.parseDate"
+                  printMethod="ru.otus.exchange.xsdshema.adapter.DateAdapter.printDate"/>
+
+        <javaType name="java.lang.Integer" xmlType="xsd:gYear"
+                  parseMethod="ru.otus.exchange.xsdshema.adapter.GYearAdapter.parseDate"
+                  printMethod="ru.otus.exchange.xsdshema.adapter.GYearAdapter.printDate"/>
+
+        <javaType name="java.lang.Integer" xmlType="xsd:gMonth"
+                  parseMethod="ru.otus.exchange.xsdshema.adapter.GMonthAdapter.parseDate"
+                  printMethod="ru.otus.exchange.xsdshema.adapter.GMonthAdapter.printDate"/>
+
+        <javaType name="java.lang.Integer" xmlType="xsd:gDay"
+                  parseMethod="ru.otus.exchange.xsdshema.adapter.GDayAdapter.parseDate"
+                  printMethod="ru.otus.exchange.xsdshema.adapter.GDayAdapter.printDate"/>
+    </globalBindings>
+
+
+</bindings>
+

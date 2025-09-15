@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:flt="http://exchange.support/utility/fault"
+            targetNamespace="http://exchange.support/utility/fault"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified" >
+
+  <xsd:simpleType name="FaultDescriptionType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="ru">Текстовая детализация ошибки. Должно быть на русском языке.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:complexType name="GenericFaultType" final="extension">
+    <xsd:annotation>
+      <xsd:documentation>Общий тип сообщения об ошибке.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="FaultCode" type="xsd:QName"/>
+      <xsd:element name="FaultDescription" type="flt:FaultDescriptionType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,24 @@
+FROM python:3.10
+
+RUN apt-get update && apt-get install -y supervisor
+
+RUN mkdir -p /var/log/supervisor
+
+COPY build/jcmd_jre /opt/openjre21_jcmd
+
+
+COPY scripts/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY scripts/exception_all.jfc /exception_all.jfc
+COPY scripts/jfr_listener.py /jfr_listener.py
+COPY scripts/run_jcmd.sh /run_jcmd.sh
+
+COPY ./build/gateway-service.jar /gateway.jar
+
+ENV JAVA_OPTS=""
+
+ENV PATH="$PATH:/opt/openjre21_jcmd/bin"
+
+ENV JAVA_OPTS=""
+ENV JFR_LISTENER_PORT="12345"
+
+CMD ["/usr/bin/supervisord"]

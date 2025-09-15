@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+serviceId: gateway
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: xmlRoute
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/receive
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: backendA
+                statusCodes:
+                  - 500
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      sliding-window-type: time_based  # timed control type
+      failure-rate-threshold: 50
+      sliding-window-size: 10
+      wait-duration-in-open-state: 1s
+      permitted-number-of-calls-in-half-open-state: 1
+      minimum-number-of-calls: 5
+  instances:
+    backendA:
+      baseConfig: default
+

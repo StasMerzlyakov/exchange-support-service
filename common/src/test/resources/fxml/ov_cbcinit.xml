@@ -1,0 +1,17 @@
+<cm:OVOperation xmlns:cm="http://ru/pvdnp/smev3/cm">
+    <cm:OvMessageId>eb3163d9-e69c-11e9-95c1-1a83b407dd11</cm:OvMessageId>
+    <cm:StorageKey>StorageKey</cm:StorageKey>
+    <cm:Attachments>
+        <cm:StorageKey>KEY1</cm:StorageKey>
+    </cm:Attachments>
+    <cm:Attachments>
+        <cm:StorageKey>KEY2</cm:StorageKey>
+    </cm:Attachments>
+    <cm:Attachments>
+        <cm:StorageKey>KEY3</cm:StorageKey>
+    </cm:Attachments>
+    <cm:VSType>
+        <cm:NamespaceURI>http://xsd.gspvd/v001/mfc/1.0.2</cm:NamespaceURI>
+        <cm:RootElementLocalName>EnvelopeRequest</cm:RootElementLocalName>
+    </cm:VSType>
+</cm:OVOperation>

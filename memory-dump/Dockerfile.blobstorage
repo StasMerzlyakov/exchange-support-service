@@ -1,0 +1,13 @@
+FROM openjdk:21
+
+COPY ./build/blob-storage-spring.jar /blob-storage-spring.jar
+
+ENV JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+
+ENV HEAP_DUMP_OPTS="-Xmx56m -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=./dump/heapdump.hprof"
+
+ENV GC_OPTS="-XX:+UseSerialGC -Xlog:gc*=debug:file=./dump/gc-Practice-%p-%t.log:time"
+
+ENV SPRING_OPTS=""
+
+ENTRYPOINT exec java $JMX_OPTS $HEAP_DUMP_OPTS $GC_OPTS -jar /blob-storage-spring.jar
